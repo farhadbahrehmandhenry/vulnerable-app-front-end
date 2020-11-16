@@ -42,7 +42,7 @@ class SqlInjection extends Component {
             {result.type === 'error' ? 
               <div className='sql-injection-result-error'>error</div> :
               result.type === 'success' && result.res.length > 0 ? 
-              result.res.map((record, index) => <ResultRecords record={record} index={index} key={record.id}/> ) :
+              result.res.map((record, index) => <ResultRecords record={record} index={index} key={index}/> ) :
               result.type === 'success' && result.res.length === 0 ?
               <div className='sql-injection-result-error'>error</div> :
               <div className='sql-injection-result-waiting'>waiting!!!!</div>
