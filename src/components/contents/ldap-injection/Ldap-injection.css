@@ -1,0 +1,10 @@
+.ldap-injection-container {
+  width: 100%;
+  height: 100%;
+  display: none;
+  background-color: #CD9777;
+}
+
+.ldap-injection-container.active {
+  display: flex;
+}

@@ -1,0 +1,14 @@
+.hacker-container {
+  position: relative;
+  left: -70rem;
+  transition: left 4s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hacker-container.active {
+  left: -2rem;
+  transition: left 2s;
+  justify-content: center;
+}

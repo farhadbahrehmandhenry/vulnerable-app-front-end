@@ -1,0 +1,14 @@
+.sql-injection-result-record {
+  display: flex;
+  justify-content: space-around;
+  height: 1.5rem;
+  width: 100%;
+  padding-top: 0.2rem;
+  border-bottom: 1px solid black;
+  opacity: 0.8;
+}
+
+.sql-injection-result-record:first-child {
+  font-weight: bold;
+  margin-top: 2rem;
+}

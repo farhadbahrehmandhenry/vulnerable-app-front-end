@@ -1,0 +1,10 @@
+.cross-site-scripting-container {
+  width: 100%;
+  height: 100%;
+  display: none;
+  background-color: #C38E70;
+}
+
+.cross-site-scripting-container.active {
+  display: flex;
+}
