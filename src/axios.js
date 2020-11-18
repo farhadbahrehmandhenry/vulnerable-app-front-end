@@ -1,7 +1,9 @@
 import axios from 'axios';
 
-const api = axios.create({
+export var sqlApi = axios.create({
   baseURL: 'http://localhost:5000/api/vulnerable'
 });
-
-export default api;
+  
+export var noSqlApi = axios.create({
+  baseURL: 'http://localhost:3100/api/vulnerable'
+})

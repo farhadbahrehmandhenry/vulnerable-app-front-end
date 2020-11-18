@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import api from '../../../../axios';
+import {sqlApi} from '../../../../axios';
 import _ from 'lodash';
 
 import './Sql-injection-form.css';
@@ -12,7 +12,7 @@ class SqlInjectionForm extends Component {
     var path = `/${this.props.type}/user`;
 
     if (_.trim(value)) {
-      api.post(path, {userId: value})
+      sqlApi.post(path, {userId: value})
         .then(response => {
           if (response.status === 200) {
             this.props.handleFetch({result: {type: 'success', res: response.data}});
