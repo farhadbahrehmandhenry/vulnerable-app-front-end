@@ -1,5 +1,5 @@
 .nosql-injection-form-container {
-  width: 100%;
+  width: 70%;
   height: 15rem;
   display: flex;
   flex-direction: column;
@@ -9,12 +9,21 @@
 
 .nosql-injection-form-container.good {
   background-color: #588157;
+  width: 15rem
 }
 
 .nosql-injection-form-container.bad {
   background-color: #9e2a2b;
+  width: 15rem
 }
 
+.nosql-injection-form-container.signup {
+  background-color: #028090;
+  /* margin-left: 0.3rem; */
+  /* margin-right: 0.3rem; */
+  width: 15rem;
+  height: 100%;
+}
 .nosql-injection-input {
   height: 2rem;
   margin-right: 1rem;

@@ -15,14 +15,13 @@
 .nosql-injection-demonstration {
   display: flex;
   justify-content: center;
-  align-items: center;
   width: 100%;
 }
 
 .nosql-injection-forms {
   display: flex;
   flex-direction: column;
-  min-width: 30%;
+  margin-right: 0.3rem;
 }
 
 .nosql-injection-hacker-button-container {
@@ -62,4 +61,19 @@
 
 .nosql-injection-result-waiting, .sql-injection-result-error {
   margin-top: 2rem;
+}
+
+.nosql-injection-forms-btn {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 3rem;
+  background-color: #98c1d9;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  align-self: flex-start;
+  justify-self: flex-start;
 }

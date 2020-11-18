@@ -10,7 +10,7 @@ class Hacker extends Component {
     return (
       <div className={classes.join(' ')}>
         <img src={hacker}></img>
-        <input className='hacker-input' type='text' value='3 OR 1=1' onChange={() => console.log()}></input>
+        <input className='hacker-input' type='text' value={this.props.text} onChange={() => console.log()}></input>
       </div>
     )
   }
