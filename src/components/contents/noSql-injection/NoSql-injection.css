@@ -70,10 +70,11 @@
   align-items: center;
   width: 100%;
   min-height: 3rem;
-  background-color: #b3895d;
+  background-color: #b27e4f;
   outline: none;
   border: none;
   cursor: pointer;
   align-self: flex-start;
   justify-self: flex-start;
+  margin-bottom: 0.3rem;
 }

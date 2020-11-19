@@ -12,10 +12,6 @@
   display: flex;
 }
 
-.os-injection-form-container {
-  height: 100%;
-}
-
 .os-injection-form {
   display: flex;
   width: 100%;
@@ -47,10 +43,6 @@
   display: flex;
 }
 
-.os-injection-container-hacker-button-container {
-
-}
-
 .os-injection-container-demonstration {
   display: flex;
   justify-content: center;
@@ -79,8 +71,26 @@
 }
 
 .os-injection-form-container {
-  width: 20%;
+  width: 50%;
   justify-self: end;
   align-self: flex-start;
+  height: 100%;
+  flex-direction: column;
+}
 
+.os-injection-forms-container {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  width: 100%;
+}
+
+.os-injection-forms-btn {
+  width: calc(100% - 0.3rem);
+  background-color: #b27e4f;
+  height: 2rem;
+  padding-top: 0.5rem;
+  margin-left: 0.3rem;
+  margin-bottom: 0.3rem;
+  cursor: pointer;
 }

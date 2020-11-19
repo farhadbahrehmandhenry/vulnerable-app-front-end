@@ -14,7 +14,8 @@
 
 .nosql-injection-form-container.bad {
   background-color: #734f38;
-  width: 15rem
+  width: 15rem;
+  margin-bottom: 0.3rem;
 }
 
 .nosql-injection-form-container.signup {

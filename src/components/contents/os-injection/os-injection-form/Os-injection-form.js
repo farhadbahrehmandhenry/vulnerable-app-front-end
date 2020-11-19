@@ -9,7 +9,7 @@ class SqlInjectionForm extends Component {
     var classes = ['os-injection-form-container', type];
 
     return (
-      <div className={classes.join(' ')}>
+      <div className={classes.join(' ')} style={{opacity: this.props.styleOpacity}}>
         <div className='os-injection-form-description'>{type === 'good' ? 'secure OS' : 'insecure OS'}</div>
         <div className='os-injection-input-button-container' >
           <div className='os-injection-form'>
