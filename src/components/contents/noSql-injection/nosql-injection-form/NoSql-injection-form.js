@@ -57,7 +57,7 @@ class NoSqlInjectionForm extends Component {
         <button 
           className='nosql-injection-btn' 
           onClick={() => this.handleLogin()}
-        >{type === 'signup' ? 'Sign up' : 'Come in'}
+        >{type === 'signup' ? 'Sign up' : 'Sign in'}
         </button>
       </div>
     );

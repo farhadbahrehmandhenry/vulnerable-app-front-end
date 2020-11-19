@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import hacker from '../../assets/hacker.png';
 
 import './Hacker.css';
 
@@ -9,7 +8,7 @@ class Hacker extends Component {
 
     return (
       <div className={classes.join(' ')}>
-        <img src={hacker}></img>
+        <img src={this.props.source}></img>
         <input className='hacker-input' type='text' value={this.props.text} onChange={() => console.log()}></input>
       </div>
     )

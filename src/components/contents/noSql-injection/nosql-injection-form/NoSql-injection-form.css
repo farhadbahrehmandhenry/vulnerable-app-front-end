@@ -8,24 +8,23 @@
 }
 
 .nosql-injection-form-container.good {
-  background-color: #588157;
+  background-color: #b3895d;
   width: 15rem
 }
 
 .nosql-injection-form-container.bad {
-  background-color: #9e2a2b;
+  background-color: #734f38;
   width: 15rem
 }
 
 .nosql-injection-form-container.signup {
-  background-color: #028090;
+  background-color: #553725;
   /* margin-left: 0.3rem; */
   /* margin-right: 0.3rem; */
   width: 15rem;
   height: 100%;
 }
 .nosql-injection-input {
-  height: 2rem;
   margin-right: 1rem;
 }
 
@@ -46,15 +45,12 @@
 .nosql-injection-result-conteiner {
   width: 20%;
   height: 100%;
-  background-color: white;
+  background-color: #482919;
+  color: white;
 }
 
 .nosql-injection-input-username {
-  margin-top: 2rem;
-}
-
-.nosql-injection-input-username, .nosql-injection-input-password {
-  height: 2rem;
+  /* margin-top: 2rem; */
 }
 
 .nosql-injection-btn {

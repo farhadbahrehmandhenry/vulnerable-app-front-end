@@ -34,7 +34,7 @@ class NoSqlInjection extends Component {
           </div>
         </div>
         <div className='nosql-injection-demonstration'>
-          <Hacker isActive={this.state.hackerStatus} text='{"$gte": 0}'/>
+          <Hacker isActive={this.state.hackerStatus}  text='3 OR 1=1' source={hackerIcon}/>
           <>
             <div className='nosql-injection-forms'>
               <div 

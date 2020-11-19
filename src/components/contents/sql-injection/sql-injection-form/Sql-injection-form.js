@@ -33,12 +33,14 @@ class SqlInjectionForm extends Component {
     return (
       <div className={classes.join(' ')}>
         <div className='sql-injection-form-description'>{type === 'good' ? 'secure SQL' : 'insecure SQL'}</div>
-        <input 
-          className='sql-injection-input' 
-          type='text' placeholder='User Id' 
-          ref={(userInput) => this.userInput = userInput}
-        ></input>
-        <button className='sql-injection-btn' onClick={() => this.selectUser()}>Fetch it</button>
+        <div className='sql-injection-input-button-container' >
+          <input 
+            className='sql-injection-input' 
+            type='text' placeholder='User Id' 
+            ref={(userInput) => this.userInput = userInput}
+          ></input>
+          <button className='sql-injection-btn' onClick={() => this.selectUser()}>Fetch it</button>
+        </div>
       </div>
     );
   }
