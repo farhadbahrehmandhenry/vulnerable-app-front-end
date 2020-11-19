@@ -15,14 +15,20 @@ class NoSqlInjectionForm extends Component {
     if (_.trim(userName) && _.trim(password)) {
       noSqlApi.post(path, {userName, password})
         .then(response => {
+          console.log(response)
           if (response.status === 200) {
-            this.props.handleFetch({result: {type: 'success', res: response.data}});
+            this.props.handleFetch({result: {type, res: response.data}});
             this.usernameInput.value = '';
             this.passwordInput.value = '';
-            console.log(response)
+          }
+
+          if (!response) {
+            this.props.handleFetch({result: {type: 'error', res: 'error'}})
           }
         })
-        .catch(error => this.props.handleFetch({result: {type: 'error', res: 'error'}}));
+        .catch(error => {
+          this.props.handleFetch({result: {type: 'error', res: 'error'}})
+        });
     }
     else {
       alert('username or password is blank...')

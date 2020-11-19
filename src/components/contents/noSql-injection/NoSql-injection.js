@@ -66,8 +66,8 @@ class NoSqlInjection extends Component {
           </>
           <div className='nosql-injection-result-conteiner'>
             {result.type === 'error' ? 
-              <div className='nosql-injection-result-error'>error</div> :
-              result.type === 'success' && result.res.userName ? 
+              <div className='nosql-injection-result-waiting'>error!!</div> :
+              result.type !== 'signup' && (result.res && result.res.userName) ? 
               <div 
                 className='nosql-injection-result-waiting'
               >{`Welcome ${result.res.userName}, you successfully logged in!!`}
