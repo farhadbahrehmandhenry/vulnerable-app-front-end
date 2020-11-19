@@ -12,14 +12,21 @@
   display: flex;
 }
 
+.os-injection-form-container {
+  height: 100%;
+}
+
 .os-injection-form {
   display: flex;
-  width: 20rem;
+  width: 100%;
   margin-bottom: 1rem;
+  margin-top: 2rem;
+  justify-content: center;
 }
 
 .os-injection-input {
   width: 15rem;
+  margin-left: 1rem;
   margin-right: 0.2rem;
 }
 
@@ -28,8 +35,8 @@
 }
 
 .os-injection-files {
-  min-width: 20rem;
-  height: 30rem;
+  width: calc(100% - 2px);
+  height: 100%;
   border: 1px solid black;
   background-color: #774936;
   color: white;
@@ -49,6 +56,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
+  height: 40rem;
 }
 
 .os-injection-container-hacker-button-container {
@@ -68,4 +76,11 @@
   width: 2rem;
   height: 2rem;
   padding-top: 0.2rem;
+}
+
+.os-injection-form-container {
+  width: 20%;
+  justify-self: end;
+  align-self: flex-start;
+
 }

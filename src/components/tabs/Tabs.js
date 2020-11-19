@@ -16,7 +16,7 @@ class Tabs extends Component {
     contents: [
       {key: 'sqlInjection', isActive: true},
       {key: 'noSqlInjection', isActive: false}, 
-      {key: 'oSInjection', isActive: false},
+      {key: 'oSCommandInjection', isActive: false},
       {key: 'lDAPInjection', isActive: false},
       {key: 'crossSiteScripting', isActive: false},
       {key: 'insecureDeserialization', isActive: false}
@@ -34,7 +34,7 @@ class Tabs extends Component {
     var tabs = [
       {key: 'noSqlInjection', value: 'NoSQL Injection'},
       {key: 'sqlInjection', value: 'SQL Injection'},
-      {key: 'oSInjection', value: 'OS Injection'},
+      {key: 'oSCommandInjection', value: 'OS Command Injection'},
       {key: 'lDAPInjection', value: 'LDAP Injection'}, 
       {key: 'crossSiteScripting', value: 'Cross-site scripting'}, 
       {key: 'insecureDeserialization', value: 'Insecure deserialization'}
@@ -57,7 +57,7 @@ class Tabs extends Component {
         <Content>
           <SqlInjection isActive={_.find(this.state.contents, content => content.key === 'sqlInjection').isActive}/>
           <NoSqlInjection isActive={_.find(this.state.contents, content => content.key === 'noSqlInjection').isActive}/>
-          <OsInjection isActive={_.find(this.state.contents, content => content.key === 'oSInjection').isActive}/>
+          <OsInjection isActive={_.find(this.state.contents, content => content.key === 'oSCommandInjection').isActive}/>
           <LdapInjection isActive={_.find(this.state.contents, content => content.key === 'lDAPInjection').isActive}/>
           <CrossSiteScripting isActive={_.find(this.state.contents, content => content.key === 'crossSiteScripting').isActive}/>
           <InsecureDeserialization isActive={_.find(this.state.contents, content => content.key === 'insecureDeserialization').isActive}/>

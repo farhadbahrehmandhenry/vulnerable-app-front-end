@@ -4,12 +4,19 @@ import './Hacker.css';
 
 class Hacker extends Component {
   render() {
-    var classes = ['hacker-container', this.props.isActive ? 'active' : ''];
+    var {isActive, type, text} = this.props;
+    var classes = ['hacker-container', isActive ? 'active' : '', type];
 
     return (
       <div className={classes.join(' ')}>
-        <img src={this.props.source}></img>
-        <input className='hacker-input' type='text' value={this.props.text} onChange={() => console.log()}></input>
+        {type !== 'os' ? 
+          <img src={this.props.source}></img> : 
+          <input className='hacker-input' type='text' value={text} onChange={() => console.log()}></input>
+        }
+        {type !== 'os' ? 
+          <input className='hacker-input' type='text' value={text} onChange={() => console.log()}></input> :
+          <img src={this.props.source}></img>
+        }
       </div>
     )
   }

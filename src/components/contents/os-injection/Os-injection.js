@@ -1,14 +1,19 @@
 import React, {Component} from 'react';
-import hackerHandIcon from '../../../assets/hacker-hand.png';
+import hackerFingerIcon from '../../../assets/hacker-finger.png';
 import hackerIcon from '../../../assets/hacker.png';
 import Hacker from '../../hacker/Hacker.js';
-
+import OsInjectionForm from './os-injection-form/Os-injection-form';
 import './Os-injection.css';
 
 class OsInjection extends Component {
   state = {
     hackerStatus: false,
   }
+
+  handleHackerButtonClick() {
+    this.setState({hackerStatus: !this.state.hackerStatus});
+  }
+
   render() {
     var classes = ['os-injection-container', this.props.isActive ? 'active' : ''];
 
@@ -20,15 +25,12 @@ class OsInjection extends Component {
           </div>
         </div>
         <div className='os-injection-container-demonstration'>
-          <div className='os-injection-form'>
-            <input className='os-injection-input' placeholder='file name'></input>
-            <button className='os-injection-btn'>Add File</button>
+          <div className='os-injection-form-container'>
+            <OsInjectionForm type='bad'/>
+            <OsInjectionForm type='good'/>
           </div>
-          <div className='os-injection-files'></div>
-          <Hacker isActive={this.state.hackerStatus}  text='3 OR 1=1' source={hackerHandIcon}/>
+          <Hacker isActive={this.state.hackerStatus}  text='3 OR 1=1' source={hackerFingerIcon} type='os'/>
         </div>
-
-
       </div>
     );
   }

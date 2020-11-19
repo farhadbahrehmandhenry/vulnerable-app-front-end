@@ -12,3 +12,22 @@
   transition: left 2s;
   justify-content: center;
 }
+
+.hacker-container.os {
+  position: relative;
+  left: 100rem;
+  transition: left 4s;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.hacker-container.active.os {
+  left: 2rem;
+  transition: left 2s;
+  justify-content: center;
+}
+
+.hacker-container input{
+  height: 4rem;
+}

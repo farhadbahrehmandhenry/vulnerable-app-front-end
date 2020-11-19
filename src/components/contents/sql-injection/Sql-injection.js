@@ -33,7 +33,7 @@ class SqlInjection extends Component {
           </div>
         </div>
         <div className='sql-injection-demonstration'>
-          <Hacker isActive={this.state.hackerStatus}  text='3 OR 1=1' source={hackerIcon}/>
+          <Hacker isActive={this.state.hackerStatus}  text='3 OR 1=1' source={hackerIcon} type='sql'/>
           <div className='sql-injection-forms'>
             <SqlInjectionForm type='bad' handleFetch={({result}) => this.handleFetchedResult({result})}/>
             <SqlInjectionForm type='good' handleFetch={({result}) => this.handleFetchedResult({result})}/>
