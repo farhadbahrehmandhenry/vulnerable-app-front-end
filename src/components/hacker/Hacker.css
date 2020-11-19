@@ -28,6 +28,6 @@
   justify-content: center;
 }
 
-.hacker-container input{
+.hacker-container.os input{
   height: 4rem;
 }

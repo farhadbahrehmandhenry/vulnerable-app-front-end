@@ -1,30 +1,57 @@
 .nosql-injection-form-container {
-  width: 70%;
-  height: 15rem;
+  width: 100%;
+  height: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
+}
+
+.nosql-injection-form-container.active {
+  height: 15rem;
+  transition: height 1s;
 }
 
 .nosql-injection-form-container.good {
   background-color: #b3895d;
-  width: 15rem
+  width: 15rem;
+  max-height: 50%;
+  transition: height 1s;
+  height: 0;
+}
+
+.nosql-injection-form-container.good.active {
+  transition: height 1s;
+  height: 100%;
 }
 
 .nosql-injection-form-container.bad {
   background-color: #734f38;
   width: 15rem;
   margin-bottom: 0.3rem;
+  max-height: 50%;
+  transition: height 1s;
+  height: 0;
+}
+
+.nosql-injection-form-container.bad.active {
+  transition: height 1s;
+  height: 100%;
 }
 
 .nosql-injection-form-container.signup {
   background-color: #553725;
-  /* margin-left: 0.3rem; */
-  /* margin-right: 0.3rem; */
   width: 15rem;
+  transition: height 1s;
+  height: 0;
+}
+
+.nosql-injection-form-container.signup.active {
+  transition: height 1s;
   height: 100%;
 }
+
 .nosql-injection-input {
   margin-right: 1rem;
 }
@@ -46,12 +73,24 @@
 .nosql-injection-result-conteiner {
   width: 20%;
   height: 100%;
-  background-color: #482919;
+  background-color: #774936;
   color: white;
 }
 
-.nosql-injection-input-username {
-  /* margin-top: 2rem; */
+.nosql-injection-input-username, 
+.nosql-injection-input-password, 
+.nosql-injection-btn, 
+.nosql-injection-form-description {
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.nosql-injection-input-username.active, 
+.nosql-injection-input-password.active, 
+.nosql-injection-btn.active, 
+.nosql-injection-form-description.active {
+  opacity: 1;
+  transition: opacity 3s;
 }
 
 .nosql-injection-btn {

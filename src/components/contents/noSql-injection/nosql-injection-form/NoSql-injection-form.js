@@ -37,25 +37,29 @@ class NoSqlInjectionForm extends Component {
 
   render() {
     var {type} = this.props;
-    var classes = ['nosql-injection-form-container', type];
+    var classes = ['nosql-injection-form-container', type, this.props.styleOpacity ? '' : 'active'];
+    var userNameClasses = ['nosql-injection-input-username', this.props.styleOpacity ? '' : 'active'];
+    var passwordClasses = ['nosql-injection-input-password', this.props.styleOpacity ? '' : 'active']
+    var btnClasses = ['nosql-injection-btn', this.props.styleOpacity ? '' : 'active']
+    var descriptionClasses = ['nosql-injection-form-description', this.props.styleOpacity ? '' : 'active']
 
     return (
-      <div className={classes.join(' ')} style={{opacity: this.props.styleOpacity}}>
+      <div className={classes.join(' ')}>
         {type !== 'signup' && 
-          <div className='nosql-injection-form-description'>{type === 'good' ? 'secure NoSQL' : 'insecure NoSQL'}</div>
+          <div className={descriptionClasses.join(' ')}>{type === 'good' ? 'secure NoSQL' : 'insecure NoSQL'}</div>
         }
         <input 
-          className='nosql-injection-input-username' 
+          className={userNameClasses.join(' ')}
           type='text' placeholder='username' 
           ref={(usernameInput) => this.usernameInput = usernameInput}
         ></input>
         <input 
-          className='nosql-injection-input-password' 
+          className={passwordClasses.join(' ')}
           type='text' placeholder='password' 
           ref={(passwordInput) => this.passwordInput = passwordInput}
         ></input>
         <button 
-          className='nosql-injection-btn' 
+          className={btnClasses.join(' ')}
           onClick={() => this.handleLogin()}
         >{type === 'signup' ? 'Sign up' : 'Sign in'}
         </button>

@@ -10,7 +10,8 @@ import './Sql-injection.css';
 class SqlInjection extends Component {
   state = {
     hackerStatus: false,
-    result: {}
+    result: {},
+    isFormVisible: false
   }
 
   handleHackerButtonClick() {
@@ -23,7 +24,7 @@ class SqlInjection extends Component {
 
   render() {
     var classes = ['sql-injection-container', this.props.isActive ? 'active' : ''];
-    var {result} = this.state;
+    var {result, isFormVisible} = this.state;
 
     return (
       <div className={_.join(classes, ' ')}>
@@ -34,9 +35,15 @@ class SqlInjection extends Component {
         </div>
         <div className='sql-injection-demonstration'>
           <Hacker isActive={this.state.hackerStatus}  text='3 OR 1=1' source={hackerIcon} type='sql'/>
-          <div className='sql-injection-forms'>
-            <SqlInjectionForm type='bad' handleFetch={({result}) => this.handleFetchedResult({result})}/>
-            <SqlInjectionForm type='good' handleFetch={({result}) => this.handleFetchedResult({result})}/>
+          <div className='sql-injection-forms-container'>
+            <div 
+              className='sql-injection-forms-btn' 
+              onClick={() => this.setState({isFormVisible: !isFormVisible})}
+            >Find user by id</div>
+            <div className='sql-injection-forms'>
+              <SqlInjectionForm type='bad' handleFetch={({result}) => this.handleFetchedResult({result})} styleOpacity={isFormVisible ? 1 : 0}/>
+              <SqlInjectionForm type='good' handleFetch={({result}) => this.handleFetchedResult({result})} styleOpacity={isFormVisible ? 1 : 0}/>
+            </div>
           </div>
           <div className='sql-injection-result-conteiner'>
             {result.type === 'error' ? 

@@ -64,3 +64,20 @@
 .sql-injection-result-waiting, .sql-injection-result-error {
   margin-top: 2rem;
 }
+
+.sql-injection-forms-container {
+
+}
+
+.sql-injection-forms-container {
+  width: 20%;
+}
+
+.sql-injection-forms-btn {
+  width: calc(100% - 0.3rem);
+  background-color: #b27e4f;
+  height: 2rem;
+  padding-top: 0.5rem;
+  margin-bottom: 0.3rem;
+  cursor: pointer;
+}

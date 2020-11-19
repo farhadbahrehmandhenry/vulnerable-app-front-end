@@ -31,7 +31,7 @@ class SqlInjectionForm extends Component {
     var classes = ['sql-injection-form-container', type];
 
     return (
-      <div className={classes.join(' ')}>
+      <div className={classes.join(' ')} style={{opacity: this.props.styleOpacity}}>
         <div className='sql-injection-form-description'>{type === 'good' ? 'secure SQL' : 'insecure SQL'}</div>
         <div className='sql-injection-input-button-container' >
           <input 
