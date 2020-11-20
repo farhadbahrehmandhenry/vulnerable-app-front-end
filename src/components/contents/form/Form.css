@@ -1,0 +1,142 @@
+.form-Container {
+  margin-right: 0.3rem;
+  margin-bottom: 0.3rem;
+}
+
+.form-title {
+  display: flex;
+}
+
+.form-components-container {
+  width: 100%;
+  height: 0;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 0;
+  transition: height 1s;
+}
+
+.form-components-container.active {
+  height: calc(100% - 3rem - 0.3rem);
+  transition: height 1s;
+}
+
+.form-component {
+  display: flex;
+  z-index: 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-component.column {
+  flex-direction: column;
+}
+
+.form-component.row {
+  flex-direction: row;
+}
+
+.form-component.good {
+  background-color: #b3895d;
+  width: 15rem;
+  max-height: 50%;
+  transition: height 1s;
+  height: 0;
+}
+
+.form-component.good.active {
+  transition: height 1s;
+  height: 100%;
+}
+
+.form-component.bad {
+  background-color: #734f38;
+  width: 15rem;
+  margin-bottom: 0.3rem;
+  max-height: 50%;
+  transition: height 1s;
+  height: 0;
+}
+
+.form-component.bad.active {
+  transition: height 1s;
+  height: 100%;
+}
+
+.form-component.signup {
+  background-color: #553725;
+  width: 15rem;
+  transition: height 1s;
+  height: 0;
+}
+
+.form-component.signup.active {
+  transition: height 1s;
+  height: 100%;
+}
+
+.component-title {
+  height: 2rem;
+  width: 100%;
+  padding-top: 2rem;
+  margin-right: 1rem;
+  text-align: left;
+  margin-left: 3rem;
+}
+
+.form-title {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 3rem;
+  background-color: #b27e4f;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  align-self: flex-start;
+  justify-self: flex-start;
+  margin-bottom: 0.3rem;
+  z-index: 10;
+  min-width: 15rem;
+}
+
+.form-btn {
+  height: 2.4rem;
+  width: 10rem;
+  border-radius: 1rem;
+  outline: none;
+  border: none;
+  margin-top: 0.5rem;
+}
+
+.form-input {
+  margin-top: 0.2rem;
+}
+
+.component-title {
+  padding-top: 0;
+}
+
+.form-btn, .form-input, .component-title {
+  border-radius: 1rem;
+  outline: none;
+  opacity: 0;
+  border: none;
+  height: 2rem;
+  z-index: 0;
+  display: none;
+  transition: opacity 2s;
+}
+
+
+.form-input.active,
+.form-btn.active,
+.component-title.active {
+  display: block;
+  z-index: 1;
+  opacity: 1;
+  transition: opacity 2s;
+}

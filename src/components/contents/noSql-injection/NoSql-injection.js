@@ -1,17 +1,15 @@
 import React, {Component} from 'react';
 import _ from 'lodash';
-import NoSqlInjectionForm from './nosql-injection-form/NoSql-injection-form';
 import Hacker from '../../hacker/Hacker.js';
 import hackerIcon from '../../../assets/hacker.png';
+import Form from '../form/Form';
 
 import './NoSql-injection.css';
 
 class NoSqlInjection extends Component {
   state = {
     hackerStatus: false,
-    result: {},
-    isSignupVisible: false,
-    isLoginVisible: false
+    result: {}
   }
 
   handleHackerButtonClick() {
@@ -24,7 +22,7 @@ class NoSqlInjection extends Component {
 
   render() {
     var classes = ['nosql-injection-container', this.props.isActive ? 'active' : ''];
-    var {result, isSignupVisible, isLoginVisible} = this.state;
+    var {result} = this.state;
 
     return (
       <div className={_.join(classes, ' ')}>
@@ -35,35 +33,25 @@ class NoSqlInjection extends Component {
         </div>
         <div className='nosql-injection-demonstration'>
           <Hacker isActive={this.state.hackerStatus} text='{"$gte": 0}' source={hackerIcon} type='nosql'/>
-          <>
-            <div className='nosql-injection-forms'>
-              <div 
-                className='nosql-injection-forms-btn' 
-                onClick={() => this.setState({isSignupVisible: !isSignupVisible})}
-              >Sign up</div>
-              <NoSqlInjectionForm 
-                type='signup' 
-                handleFetch={({result}) => this.handleFetchedResult({result})}
-                styleOpacity={isSignupVisible ? 1 : 0}
-              />
-            </div>
-            <div className='nosql-injection-forms'>
-              <div 
-                className='nosql-injection-forms-btn' 
-                onClick={() => this.setState({isLoginVisible: !isLoginVisible})}
-              >Log in</div>
-              <NoSqlInjectionForm 
-                type='bad' 
-                handleFetch={({result}) => this.handleFetchedResult({result})}
-                styleOpacity={isLoginVisible ? 1 : 0}
-              />
-              <NoSqlInjectionForm 
-                type='good' 
-                handleFetch={({result}) => this.handleFetchedResult({result})}
-                styleOpacity={isLoginVisible ? 1 : 0}
-              />
-            </div>
-          </>
+          <Form 
+            forms={{
+              title: 'Sign up', 
+              components: [
+                {inputs: ['username', 'password'], buttons: ['Sign up'], title: '', type: 'signup', direction: 'column'}
+              ]
+            }}
+            handleFetch={({result}) => this.handleFetchedResult({result})}
+          />
+          <Form 
+            forms={{
+              title: 'Log in', 
+              components: [
+                {inputs: ['username', 'password'], buttons: ['Log in'], title: 'insecure noSql', type: 'bad', direction: 'column'},
+                {inputs: ['username', 'password'], buttons: ['Log in'], title: 'secure noSql', type: 'good', direction: 'column'}
+              ]
+            }}
+            handleFetch={({result}) => this.handleFetchedResult({result})}
+          />
           <div className='nosql-injection-result-conteiner'>
             {result.type === 'error' ? 
               <div className='nosql-injection-result-waiting'>error!!</div> :
