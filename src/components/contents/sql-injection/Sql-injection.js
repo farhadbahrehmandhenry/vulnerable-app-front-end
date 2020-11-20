@@ -37,6 +37,7 @@ class SqlInjection extends Component {
           <Form 
             forms={{
               title: 'Find user by id', 
+              vulneribility: 'sql',
               components: [
                 {id: 1, inputs: ['userId'], buttons: ['Find'], title: 'insecure Sql', type: 'bad', direction: 'column'},
                 {id: 2, inputs: ['userId'], buttons: ['Find'], title: 'secure Sql', type: 'good', direction: 'column'}

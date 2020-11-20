@@ -3,6 +3,11 @@
   margin-bottom: 0.3rem;
 }
 
+.form-Container.os {
+  width: 50%;
+  height: 100%;
+}
+
 .form-title {
   display: flex;
 }
@@ -17,6 +22,10 @@
   transition: height 1s;
 }
 
+.form-components-container.os {
+  flex-direction: row;
+}
+
 .form-components-container.active {
   height: calc(100% - 3rem - 0.3rem);
   transition: height 1s;
@@ -27,6 +36,16 @@
   z-index: 0;
   justify-content: center;
   align-items: center;
+}
+
+.form-component.os {
+  min-width: 50%;
+  min-height: 100%;
+}
+
+.form-component.os:first-child {
+  margin-right: 0.3rem;
+  min-width: calc(50% - 0.3rem);
 }
 
 .form-component.column {
@@ -123,12 +142,30 @@
 .form-btn, .form-input, .component-title {
   border-radius: 1rem;
   outline: none;
-  opacity: 0;
   border: none;
   height: 2rem;
   z-index: 0;
   display: none;
-  transition: opacity 2s;
+  opacity: 0;
+  animation-name: disappear;
+  animation-duration: 1s;
+}
+
+.form-textarea {
+  outline: none;
+  animation-duration: 2s;
+  border: none;
+  display: none;
+}
+
+.form-textarea.active {
+  width: calc(100% - 0.4rem);
+  height: calc(100% - 10rem);
+  margin-top: 0.5rem;
+  display: block;
+  z-index: 100;
+  opacity: 1;
+  background-color: gray;
 }
 
 
@@ -139,4 +176,22 @@
   z-index: 1;
   opacity: 1;
   transition: opacity 2s;
+  animation-name: appear;
+  animation-duration: 2s;
+}
+
+@keyframes appear {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+@keyframes disappear {
+  0% {
+    opacity: 1;
+    display: block;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+  }
 }

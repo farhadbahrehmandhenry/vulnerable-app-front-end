@@ -79,11 +79,14 @@ class Form extends Component {
     var {isFormVisible} = this.state;
 
     return (
-      <div className='form-Container'>
+      <div className={['form-Container', forms.vulneribility].join(' ')}>
         <div className='form-title' onClick={() => this.setState({isFormVisible: !isFormVisible})}>{forms.title}</div>
-        <div className={['form-components-container', isFormVisible ? 'active' : ''].join(' ')}>
+        <div className={['form-components-container', forms.vulneribility, isFormVisible ? 'active' : ''].join(' ')}>
           {forms.components.map(component => (
-            <div key={component.id} className={['form-component', component.direction, component.type, isFormVisible ? 'active' : ''].join(' ')}>
+            <div 
+              key={component.id} 
+              className={['form-component', forms.vulneribility, component.direction, component.type, isFormVisible ? 'active' : ''].join(' ')}
+            >
               {component.title && <div className={['component-title', isFormVisible ? 'active' : ''].join(' ')}>{component.title}</div>}
               {component.inputs.map(input => (
                 <input 
@@ -98,9 +101,17 @@ class Form extends Component {
                 <button 
                   className={[`form-btn`, isFormVisible ? 'active' : ''].join(' ')} 
                   key={button}
-                  onClick={() => this.handleApiRequest({inputType: component.title, type: component.type})}>{button}
+                  onClick={() => this.handleApiRequest({inputType: component.title, type: component.type})}
+                >{button}
                 </button>
               ))}
+              {(forms.textboxes && forms.textboxes.length > 0) && 
+                <textarea 
+                  className={[`form-textarea`, isFormVisible ? 'active' : ''].join(' ')} 
+                  rows="4" cols="50"
+                >
+                </textarea>
+              }
             </div>
           ))}
         </div>

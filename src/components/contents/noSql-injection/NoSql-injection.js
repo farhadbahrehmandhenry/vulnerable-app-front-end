@@ -45,6 +45,7 @@ class NoSqlInjection extends Component {
           <Form 
             forms={{
               title: 'Log in', 
+              vulneribility: 'noSql',
               components: [
                 {id: 1, inputs: ['username', 'password'], buttons: ['Log in'], title: 'insecure noSql', type: 'bad', direction: 'column'},
                 {id: 2, inputs: ['username', 'password'], buttons: ['Log in'], title: 'secure noSql', type: 'good', direction: 'column'}

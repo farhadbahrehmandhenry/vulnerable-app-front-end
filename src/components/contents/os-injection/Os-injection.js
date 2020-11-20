@@ -2,13 +2,12 @@ import React, {Component} from 'react';
 import hackerFingerIcon from '../../../assets/hacker-finger.png';
 import hackerIcon from '../../../assets/hacker.png';
 import Hacker from '../../hacker/Hacker.js';
-import OsInjectionForm from './os-injection-form/Os-injection-form';
+import Form from '../form/Form';
 import './Os-injection.css';
 
 class OsInjection extends Component {
   state = {
     hackerStatus: false,
-    isFormVisible: false
   }
 
   handleHackerButtonClick() {
@@ -17,7 +16,6 @@ class OsInjection extends Component {
 
   render() {
     var classes = ['os-injection-container', this.props.isActive ? 'active' : ''];
-    var {isFormVisible} = this.state;
 
     return (
       <div className={classes.join(' ')} >
@@ -27,16 +25,18 @@ class OsInjection extends Component {
           </div>
         </div>
         <div className='os-injection-container-demonstration'>
-          <div className='os-injection-form-container'>
-            <div 
-              className='os-injection-forms-btn' 
-              onClick={() => this.setState({isFormVisible: !isFormVisible})}
-            >Add new file</div>
-            <div className='os-injection-forms-container'>
-              <OsInjectionForm type='bad' styleOpacity={isFormVisible ? 1 : 0}/>
-              <OsInjectionForm type='good' styleOpacity={isFormVisible ? 1 : 0}/>
-            </div>
-          </div>
+          <Form 
+            forms={{
+              title: 'Create new file using CLI', 
+              vulneribility: 'os',
+              textboxes:['os files'],
+              components: [
+                {id: 1, inputs: ['fileName'], buttons: ['Create'], title: 'insecure OS Command', type: 'bad', direction: 'column'},
+                {id: 2, inputs: ['fileName'], buttons: ['Create'], title: 'secure OS Command', type: 'good', direction: 'column'}
+              ]
+            }}
+            // handleFetch={({result}) => this.handleFetchedResult({result})}
+          />
           <Hacker isActive={this.state.hackerStatus}  text='3 OR 1=1' source={hackerFingerIcon} type='os'/>
         </div>
       </div>
