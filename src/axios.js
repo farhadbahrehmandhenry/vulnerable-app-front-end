@@ -6,4 +6,8 @@ export var sqlApi = axios.create({
   
 export var noSqlApi = axios.create({
   baseURL: 'http://localhost:3100/api/vulnerable'
-})
+});
+
+export var ldapApi = axios.create({
+  baseURL: 'http://localhost:8080/api/vulnerable'
+});

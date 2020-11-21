@@ -37,7 +37,7 @@ class NoSqlInjection extends Component {
             forms={{
               title: 'Sign up', 
               components: [
-                {id: 1, inputs: ['username', 'password'], buttons: ['Sign up'], title: '', type: 'signup', direction: 'column'}
+                {id: 1, inputs: ['username', 'password'], buttons: [{type: 'Sign up'}, {type: 'remove'}], title: '', type: 'signup', direction: 'column'}
               ]
             }}
             handleFetch={({result}) => this.handleFetchedResult({result})}
@@ -47,8 +47,8 @@ class NoSqlInjection extends Component {
               title: 'Log in', 
               vulneribility: 'noSql',
               components: [
-                {id: 1, inputs: ['username', 'password'], buttons: ['Log in'], title: 'insecure noSql', type: 'bad', direction: 'column'},
-                {id: 2, inputs: ['username', 'password'], buttons: ['Log in'], title: 'secure noSql', type: 'good', direction: 'column'}
+                {id: 1, inputs: ['username', 'password'], buttons: [{type: 'Log in'}], title: 'insecure noSql', type: 'bad', direction: 'column'},
+                {id: 2, inputs: ['username', 'password'], buttons: [{type: 'Log in'}], title: 'secure noSql', type: 'good', direction: 'column'}
               ]
             }}
             handleFetch={({result}) => this.handleFetchedResult({result})}

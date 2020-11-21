@@ -31,8 +31,8 @@ class OsInjection extends Component {
               vulneribility: 'os',
               textboxes:['os files'],
               components: [
-                {id: 1, inputs: ['fileName'], buttons: ['Create'], title: 'insecure OS Command', type: 'bad', direction: 'column'},
-                {id: 2, inputs: ['fileName'], buttons: ['Create'], title: 'secure OS Command', type: 'good', direction: 'column'}
+                {id: 1, inputs: ['fileName'], buttons: [{type: 'Create'}], title: 'insecure OS Command', type: 'bad', direction: 'column'},
+                {id: 2, inputs: ['fileName'], buttons: [{type: 'Create'}], title: 'secure OS Command', type: 'good', direction: 'column'}
               ]
             }}
             // handleFetch={({result}) => this.handleFetchedResult({result})}

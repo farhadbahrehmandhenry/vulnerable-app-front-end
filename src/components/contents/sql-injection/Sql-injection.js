@@ -39,8 +39,8 @@ class SqlInjection extends Component {
               title: 'Find user by id', 
               vulneribility: 'sql',
               components: [
-                {id: 1, inputs: ['userId'], buttons: ['Find'], title: 'insecure Sql', type: 'bad', direction: 'column'},
-                {id: 2, inputs: ['userId'], buttons: ['Find'], title: 'secure Sql', type: 'good', direction: 'column'}
+                {id: 1, inputs: ['userId'], buttons: [{type: 'Find'}], title: 'insecure Sql', type: 'bad', direction: 'column'},
+                {id: 2, inputs: ['userId'], buttons: [{type: 'Find'}], title: 'secure Sql', type: 'good', direction: 'column'}
               ]
             }}
             handleFetch={({result}) => this.handleFetchedResult({result})}

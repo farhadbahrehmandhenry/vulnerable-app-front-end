@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {noSqlApi, sqlApi} from '../../../axios';
+import {noSqlApi, sqlApi, ldapApi} from '../../../axios';
 import _ from 'lodash';
 
 import './Form.css';
@@ -7,12 +7,22 @@ import './Form.css';
 class Form extends Component {
   state = {isFormVisible: false}
 
-  handleApiRequest({inputType, type}) {
+  handleApiRequest({inputType, type, btnType}) {
+    console.log(btnType)
     if (_.includes(['insecure noSql', 'secure noSql'], inputType)) {
       this.handleNoSqlApiRequest({inputType, type});
     }
-    else {
+    else if (_.includes(['insecure Sql', 'secure Sql'], inputType)) {
       this.handleSqlApiRequest({inputType, type});
+    }
+    else if (_.includes(['insecure Ldap', 'secure Ldap'], inputType)) {
+      this.handleLdapApiRequest({inputType, type});
+    }
+    else if (btnType === 'Sign up') {
+      this.handleNoSqlSignupApiRequest();
+    }
+    else if (btnType === 'remove') {
+      this.handleNoSqlRemoveAllApiRequest();
     }
   }
 
@@ -29,11 +39,10 @@ class Form extends Component {
       password = this['secureNoSqlPassword'].value;
     }
 
-    var path = type !== 'signup' ? `/${type}/nosql` : 'signup';
     var isNoSqlValid = _.includes(['insecure noSql', 'secure noSql'], inputType) && _.trim(userName) && _.trim(password);
 
     if (isNoSqlValid) {
-      noSqlApi.post(path, {userName, password})
+      noSqlApi.post(`/${type}/nosql`, {userName, password})
         .then(response => {
           if (response.status === 200) {
             this.props.handleFetch({result: {type, res: response.data}});
@@ -53,11 +62,10 @@ class Form extends Component {
 
   handleSqlApiRequest({inputType, type}) {
     var userId = this[inputType === 'insecure Sql' ? 'insecureSqlUserid' : 'secureSqlUserid'].value;
-    var path = `/${type}/sql`;
     var isSqlValid = _.includes(['insecure Sql', 'secure Sql'], inputType) && _.trim(userId);
 
     if (isSqlValid) {
-      sqlApi.post(path, {userId})
+      sqlApi.post(`/${type}/sql`, {userId})
         .then(response => {
           if (response.status === 200) {
             this.props.handleFetch({result: {type: 'success', res: response.data}});
@@ -72,6 +80,76 @@ class Form extends Component {
     else {
       alert('username or password is blank...')
     }
+  }
+
+  handleLdapApiRequest({inputType, type}) {
+    var userName, password;
+
+    if (inputType === 'insecure Ldap') {
+      userName = this['insecureLdapUsername'].value;
+      password = this['insecureLdapPassword'].value;
+    }
+
+    if (inputType === 'secure Ldap') {
+      userName = this['secureLdapUsername'].value;
+      password = this['secureLdapPassword'].value;
+    }
+
+    var isNoSqlValid = _.includes(['insecure Ldap', 'secure Ldap'], inputType) && _.trim(userName) && _.trim(password);
+
+    if (isNoSqlValid) {
+      ldapApi.post(`/${type}/ldap`, {userName, password})
+        .then(response => {
+          if (response.status === 200) {
+            console.log(response)
+            this.props.handleFetch({result: {type, res: response.data}});
+
+            this[inputType === 'insecure Ldap' ? 'insecureLdapUsername' : 'secureLdapUsername'].value = '';
+            this[inputType === 'insecure Ldap' ? 'insecureLdapPassword' : 'secureLdapPassword'].value = '';
+          }
+
+          if (!response) this.props.handleFetch({result: {type: 'error', res: 'error'}})
+        })
+        .catch(error => this.props.handleFetch({result: {type: 'error', res: 'error'}}));
+    }
+    else {
+      alert('username or password is blank...')
+    }
+  }
+
+  handleNoSqlSignupApiRequest() {
+    var userName, password;
+
+    userName = this.username.value;
+    password = this.password.value;
+
+    if (_.trim(userName) && _.trim(password)) {
+      noSqlApi.post('signup', {userName, password})
+        .then(response => {
+          if (response.status === 200) {
+            this.props.handleFetch({result: {type: 'signup', res: response.data}});
+
+            this.username.value = '';
+            this.password.value = '';
+          }
+
+          if (!response) this.props.handleFetch({result: {type: 'error', res: 'error'}})
+        })
+        .catch(error => this.props.handleFetch({result: {type: 'error', res: 'error'}}));
+    }
+    else {
+      alert('username or password is blank...')
+    }
+  }
+
+  handleNoSqlRemoveAllApiRequest() {
+    noSqlApi.post('removeAll')
+    .then(response => {
+      if (response.status === 200) {
+        console.log('all removed')
+      }
+    })
+    .catch(error => console.log(error));
   }
 
   render() {
@@ -97,12 +175,12 @@ class Form extends Component {
                   ref={(inputRef) => this[_.camelCase(`${component.title}${_.capitalize(input)}`)] = inputRef}
                 ></input>
               ))}
-              {component.buttons.map(button => (
+              {component.buttons.map((button, index) => (
                 <button 
                   className={[`form-btn`, isFormVisible ? 'active' : ''].join(' ')} 
-                  key={button}
-                  onClick={() => this.handleApiRequest({inputType: component.title, type: component.type})}
-                >{button}
+                  key={button.type}
+                  onClick={() => this.handleApiRequest({inputType: component.title, type: component.type, btnType: button.type})}
+                >{button.type}
                 </button>
               ))}
               {(forms.textboxes && forms.textboxes.length > 0) && 
