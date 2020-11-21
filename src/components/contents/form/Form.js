@@ -8,7 +8,6 @@ class Form extends Component {
   state = {isFormVisible: false}
 
   handleApiRequest({inputType, type, btnType}) {
-    console.log(btnType)
     if (_.includes(['insecure noSql', 'secure noSql'], inputType)) {
       this.handleNoSqlApiRequest({inputType, type});
     }
@@ -18,10 +17,16 @@ class Form extends Component {
     else if (_.includes(['insecure Ldap', 'secure Ldap'], inputType)) {
       this.handleLdapApiRequest({inputType, type});
     }
-    else if (btnType === 'Sign up') {
+    else if (btnType === 'Sign up (noSql)') {
       this.handleNoSqlSignupApiRequest();
     }
-    else if (btnType === 'remove') {
+    else if (btnType === 'this btn is for test (noSql)') {
+      this.handleNoSqlRemoveAllApiRequest();
+    }
+    else if (btnType === 'Sign up (ldap)') {
+      this.handleNoSqlSignupApiRequest();
+    }
+    else if (btnType === 'this btn is for test (ldap)') {
       this.handleNoSqlRemoveAllApiRequest();
     }
   }
@@ -101,7 +106,6 @@ class Form extends Component {
       ldapApi.post(`/${type}/ldap`, {userName, password})
         .then(response => {
           if (response.status === 200) {
-            console.log(response)
             this.props.handleFetch({result: {type, res: response.data}});
 
             this[inputType === 'insecure Ldap' ? 'insecureLdapUsername' : 'secureLdapUsername'].value = '';
@@ -145,9 +149,7 @@ class Form extends Component {
   handleNoSqlRemoveAllApiRequest() {
     noSqlApi.post('removeAll')
     .then(response => {
-      if (response.status === 200) {
-        console.log('all removed')
-      }
+      if (response.status === 200) console.log('all removed')
     })
     .catch(error => console.log(error));
   }

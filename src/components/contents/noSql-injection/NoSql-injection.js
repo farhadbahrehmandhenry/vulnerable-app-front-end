@@ -37,7 +37,7 @@ class NoSqlInjection extends Component {
             forms={{
               title: 'Sign up', 
               components: [
-                {id: 1, inputs: ['username', 'password'], buttons: [{type: 'Sign up'}, {type: 'remove'}], title: '', type: 'signup', direction: 'column'}
+                {id: 1, inputs: ['username', 'password'], buttons: [{type: 'Sign up (noSql)'}, {type: 'this btn is for test (noSql)'}], title: '', type: 'signup', direction: 'column'}
               ]
             }}
             handleFetch={({result}) => this.handleFetchedResult({result})}

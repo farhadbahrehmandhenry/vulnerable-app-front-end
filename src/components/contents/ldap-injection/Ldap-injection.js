@@ -35,6 +35,15 @@ class LdapInjection extends Component {
           <Hacker isActive={this.state.hackerStatus} text='*' source={hackerIcon} type='ldap'/>
           <Form 
             forms={{
+              title: 'Sign up', 
+              components: [
+                {id: 1, inputs: ['username', 'password'], buttons: [{type: 'Sign up (ldap)'}, {type: 'this btn is for test (ldap)'}], title: '', type: 'signup', direction: 'column'}
+              ]
+            }}
+            handleFetch={({result}) => this.handleFetchedResult({result})}
+          />
+          <Form 
+            forms={{
               title: 'Log in', 
               vulneribility: 'ldap',
               components: [
