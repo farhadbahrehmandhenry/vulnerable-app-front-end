@@ -2,7 +2,7 @@
   width: 100%;
   height: 100%;
   display: none;
-  background-color: #DEAB90;
+  background-color: #CD9777;
 }
 
 .ldap-injection-container.active {
@@ -41,25 +41,4 @@
   width: 2rem;
   height: 2rem;
   padding-top: 0.2rem;
-}
-
-.ldap-injection-result-conteiner {
-  display: flex;
-  align-items: center;
-}
-
-.ldap-injection-result-conteiner {
-  display: flex;
-  flex-direction: column;
-}
-
-.ldap-injection-result-waiting, .sql-injection-result-error {
-  margin-top: 2rem;
-}
-
-.ldap-injection-result-conteiner {
-  width: 20%;
-  height: 100%;
-  background-color: #774936;
-  color: white;
 }

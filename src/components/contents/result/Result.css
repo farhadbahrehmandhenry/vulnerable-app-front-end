@@ -1,0 +1,27 @@
+.result-conteiner {
+  display: flex;
+  align-items: center;
+}
+
+.result-conteiner {
+  display: flex;
+  flex-direction: column;
+}
+
+.result-waiting, .result-error {
+  margin-top: 2rem;
+  padding: 1.5rem;
+}
+
+.result-conteiner {
+  width: 20%;
+  height: 100%;
+  background-color: #774936;
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.result-clear-btn {
+  margin-top: 2rem;
+}

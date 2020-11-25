@@ -3,6 +3,7 @@ import _ from 'lodash';
 import Hacker from '../../hacker/Hacker.js';
 import hackerIcon from '../../../assets/hacker.png';
 import Form from '../form/Form';
+import Result from '../result/Result';
 
 import './Ldap-injection.css';
 
@@ -53,17 +54,7 @@ class LdapInjection extends Component {
             }}
             handleFetch={({result}) => this.handleFetchedResult({result})}
           />
-          <div className='ldap-injection-result-conteiner'>
-            {result.type === 'error' ? 
-              <div className='ldap-injection-result-waiting'>error!!</div> :
-              result.type !== 'good' && (result.res && result.res.cn) ? 
-              <div 
-                className='ldap-injection-result-waiting'
-              >{`Welcome ${result.res.cn}, you successfully logged in!!`}
-              </div>:
-              <div className='ldap-injection-result-waiting'>waiting!!!!</div>
-            }
-          </div>
+          <Result result={{...result, from: 'ldap'}} resetResult={() => this.setState({result: {}})}/>
         </div>
       </div>
     );

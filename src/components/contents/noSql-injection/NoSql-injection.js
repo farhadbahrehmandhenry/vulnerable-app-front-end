@@ -3,6 +3,7 @@ import _ from 'lodash';
 import Hacker from '../../hacker/Hacker.js';
 import hackerIcon from '../../../assets/hacker.png';
 import Form from '../form/Form';
+import Result from '../result/Result';
 
 import './NoSql-injection.css';
 
@@ -53,17 +54,7 @@ class NoSqlInjection extends Component {
             }}
             handleFetch={({result}) => this.handleFetchedResult({result})}
           />
-          <div className='nosql-injection-result-conteiner'>
-            {result.type === 'error' ? 
-              <div className='nosql-injection-result-waiting'>error!!</div> :
-              result.type !== 'signup' && (result.res && result.res.userName) ? 
-              <div 
-                className='nosql-injection-result-waiting'
-              >{`Welcome ${result.res.userName}, you successfully logged in!!`}
-              </div>:
-              <div className='nosql-injection-result-waiting'>waiting!!!!</div>
-            }
-          </div>
+          <Result result={{...result, from: 'noSql'}} resetResult={() => this.setState({result: {}})}/>
         </div>
       </div>
     );

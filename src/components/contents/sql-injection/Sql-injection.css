@@ -55,6 +55,7 @@
 
 .sql-injection-result-waiting, .sql-injection-result-error {
   margin-top: 2rem;
+  padding: 1.5rem;
 }
 
 .sql-injection-result-conteiner {
