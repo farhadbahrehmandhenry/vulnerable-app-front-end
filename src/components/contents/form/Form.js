@@ -29,6 +29,28 @@ class Form extends Component {
     else if (btnType === 'this btn is for test (ldap)') {
       this.handleNoSqlRemoveAllApiRequest();
     }
+    else if (_.includes(['insecure OS Command', 'secure OS Command'], inputType)) {
+      this.handleOsCommandRequest({inputType, type});
+    }
+  }
+
+  handleOsCommandRequest({inputType, type}) {
+    var fileName = inputType === 'insecure OS Command' ? this['insecureOsCommandFilename'].value : this['secureOsCommandFilename'].value;
+
+    if (_.trim(fileName)) {
+      sqlApi.post(`/${type}/os/injection`, {fileName})
+      .then(response => {
+        if (response.status === 200) {
+          this.props.handleFetch({result: {type, res: response.data}});
+
+          this[inputType === 'insecure OS Command' ? 'insecureOsCommandFilename' : 'secureOsCommandFilename'].value = '';
+        }
+      })
+      .catch(error => console.log(error));
+    }
+    else {
+      alert('fileName is blank...')
+    }
   }
 
   handleNoSqlApiRequest({inputType, type}) {
@@ -157,7 +179,7 @@ class Form extends Component {
   render() {
     var {forms} = this.props;
     var {isFormVisible} = this.state;
-
+console.log(this)
     return (
       <div className={['form-Container', forms.vulneribility].join(' ')}>
         <div className='form-title' onClick={() => this.setState({isFormVisible: !isFormVisible})}>{forms.title}</div>
@@ -188,7 +210,9 @@ class Form extends Component {
               {(forms.textboxes && forms.textboxes.length > 0) && 
                 <textarea 
                   className={[`form-textarea`, isFormVisible ? 'active' : ''].join(' ')} 
-                  rows="4" cols="50"
+                  rows="4" 
+                  cols="50"
+                  ref={(inputRef) => this[_.camelCase(`${component.title}Textarea`)] = inputRef}
                 >
                 </textarea>
               }

@@ -10,8 +10,8 @@ class OsInjection extends Component {
     hackerStatus: false,
   }
 
-  handleHackerButtonClick() {
-    this.setState({hackerStatus: !this.state.hackerStatus});
+  handleFetchedResult() {
+
   }
 
   render() {
@@ -27,17 +27,31 @@ class OsInjection extends Component {
         <div className='os-injection-container-demonstration'>
           <Form 
             forms={{
-              title: 'Create new file using CLI', 
+              title: 'Create new file', 
               vulneribility: 'os',
               textboxes:['os files'],
               components: [
-                {id: 1, inputs: ['fileName'], buttons: [{type: 'Create'}], title: 'insecure OS Command', type: 'bad', direction: 'column'},
-                {id: 2, inputs: ['fileName'], buttons: [{type: 'Create'}], title: 'secure OS Command', type: 'good', direction: 'column'}
+                {
+                  id: 1, 
+                  inputs: ['fileName'], 
+                  buttons: [{type: 'Create'}], 
+                  title: 'insecure OS Command', 
+                  type: 'bad', 
+                  direction: 'column'
+                },
+                {
+                  id: 2, 
+                  inputs: ['fileName'], 
+                  buttons: [{type: 'Create'}], 
+                  title: 'secure OS Command', 
+                  type: 'good', 
+                  direction: 'column'
+                }
               ]
             }}
-            // handleFetch={({result}) => this.handleFetchedResult({result})}
+            handleFetch={({result}) => this.handleFetchedResult({result})}
           />
-          <Hacker isActive={this.state.hackerStatus}  text='3 OR 1=1' source={hackerFingerIcon} type='os'/>
+          <Hacker isActive={this.state.hackerStatus}  text='test; ping -i 1 -c 10 127.0.0.1' source={hackerFingerIcon} type='os'/>
         </div>
       </div>
     );
