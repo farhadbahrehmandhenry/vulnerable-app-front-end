@@ -1,10 +1,91 @@
 .cross-site-scripting-container {
+  background-color: #C38E70;
   width: 100%;
   height: 100%;
   display: none;
-  background-color: #C38E70;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .cross-site-scripting-container.active {
   display: flex;
+}
+
+.cross-site-scripting-hacker-button-container {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 1.5rem;
+  background-color: #eb5e28;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  align-self: flex-start;
+  justify-self: flex-start;
+  margin-left: 2rem;
+}
+
+.cross-site-scripting-hacker-button-container img {
+  width: 2rem;
+  height: 2rem;
+  padding-top: 0.2rem;
+}
+
+.cross-site-scripting-demonstration {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 40rem;
+}
+
+.cross-site-scripting-form {
+  display: flex;
+  width: 100%;
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+  justify-content: center;
+}
+
+.cross-site-scripting-input {
+  width: 15rem;
+  margin-left: 1rem;
+  margin-right: 0.2rem;
+}
+
+.cross-site-scripting-btn {
+  width: 5rem;
+}
+
+.cross-site-scripting-files {
+  width: calc(100% - 2px);
+  height: 100%;
+  border: 1px solid black;
+  background-color: #774936;
+  color: white;
+}
+
+.cross-site-scripting-form-container {
+  width: 50%;
+  justify-self: end;
+  align-self: flex-start;
+  height: 100%;
+  flex-direction: column;
+}
+
+.cross-site-scripting-forms-container {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  width: 100%;
+}
+
+.cross-site-scripting-forms-btn {
+  width: calc(100% - 0.3rem);
+  background-color: #b27e4f;
+  height: 2rem;
+  padding-top: 0.5rem;
+  margin-left: 0.3rem;
+  margin-bottom: 0.3rem;
+  cursor: pointer;
 }

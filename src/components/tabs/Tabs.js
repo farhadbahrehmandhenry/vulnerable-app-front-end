@@ -32,8 +32,8 @@ class Tabs extends Component {
 
   render() {
     var tabs = [
-      {key: 'noSqlInjection', value: 'NoSQL Injection'},
       {key: 'sqlInjection', value: 'SQL Injection'},
+      {key: 'noSqlInjection', value: 'NoSQL Injection'},
       {key: 'oSCommandInjection', value: 'OS Command Injection'},
       {key: 'lDAPInjection', value: 'LDAP Injection'}, 
       {key: 'crossSiteScripting', value: 'Cross-site scripting'}, 

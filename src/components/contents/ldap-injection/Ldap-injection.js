@@ -34,7 +34,7 @@ class LdapInjection extends Component {
         </div>
         <div className='ldap-injection-demonstration'>
           <Hacker isActive={this.state.hackerStatus} text='*' source={hackerIcon} type='ldap'/>
-          <Form 
+          {/* <Form 
             forms={{
               title: 'Sign up', 
               components: [
@@ -42,7 +42,7 @@ class LdapInjection extends Component {
               ]
             }}
             handleFetch={({result}) => this.handleFetchedResult({result})}
-          />
+          /> */}
           <Form 
             forms={{
               title: 'Log in', 

@@ -29,5 +29,7 @@
 }
 
 .hacker-container.os input{
-  height: 4rem;
+  height: 2rem;
+  min-width: 11rem;
+  padding-right: 0.5rem;
 }

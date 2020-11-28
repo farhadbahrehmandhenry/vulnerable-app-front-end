@@ -1,3 +1,4 @@
+import { result } from 'lodash';
 import React, {Component} from 'react';
 import hackerFingerIcon from '../../../assets/hacker-finger.png';
 import hackerIcon from '../../../assets/hacker.png';
@@ -8,10 +9,25 @@ import './Os-injection.css';
 class OsInjection extends Component {
   state = {
     hackerStatus: false,
+    badCreatedFiles: [],
+    goodCreatedFiles: []
   }
 
-  handleFetchedResult() {
+  handleHackerButtonClick() {
+    this.setState({hackerStatus: !this.state.hackerStatus});
+  }
 
+  handleFetchedResult({result}) {
+    var {badCreatedFiles, goodCreatedFiles} = {...this.state};
+
+    if (result.type === 'bad') {
+      badCreatedFiles.push({fileName: result.res.fileName, time: result.res.time, status: result.res.type, from:result.from});
+      this.setState({badCreatedFiles});
+    }
+    else {
+      goodCreatedFiles.push({fileName: result.res.fileName, time: result.res.time, status: result.res.type, from:result.from});
+      this.setState({goodCreatedFiles});
+    }
   }
 
   render() {
@@ -37,7 +53,8 @@ class OsInjection extends Component {
                   buttons: [{type: 'Create'}], 
                   title: 'insecure OS Command', 
                   type: 'bad', 
-                  direction: 'column'
+                  direction: 'column',
+                  listOfItems: this.state.badCreatedFiles
                 },
                 {
                   id: 2, 
@@ -45,13 +62,14 @@ class OsInjection extends Component {
                   buttons: [{type: 'Create'}], 
                   title: 'secure OS Command', 
                   type: 'good', 
-                  direction: 'column'
+                  direction: 'column',
+                  listOfItems: this.state.goodCreatedFiles
                 }
               ]
             }}
             handleFetch={({result}) => this.handleFetchedResult({result})}
           />
-          <Hacker isActive={this.state.hackerStatus}  text='test; ping -i 1 -c 10 127.0.0.1' source={hackerFingerIcon} type='os'/>
+          <Hacker isActive={this.state.hackerStatus}  text='test3; ping -i 1 -c 10 127.0.0.1' source={hackerFingerIcon} type='os'/>
         </div>
       </div>
     );

@@ -17,20 +17,35 @@ class Form extends Component {
     else if (_.includes(['insecure Ldap', 'secure Ldap'], inputType)) {
       this.handleLdapApiRequest({inputType, type});
     }
-    else if (btnType === 'Sign up (noSql)') {
-      this.handleNoSqlSignupApiRequest();
-    }
-    else if (btnType === 'this btn is for test (noSql)') {
-      this.handleNoSqlRemoveAllApiRequest();
-    }
-    else if (btnType === 'Sign up (ldap)') {
-      this.handleNoSqlSignupApiRequest();
-    }
-    else if (btnType === 'this btn is for test (ldap)') {
-      this.handleNoSqlRemoveAllApiRequest();
-    }
+    // else if (btnType === 'Sign up (noSql)') {
+    //   this.handleNoSqlSignupApiRequest();
+    // }
+    // else if (btnType === 'this btn is for test (noSql)') {
+    //   this.handleNoSqlRemoveAllApiRequest();
+    // }
+    // else if (btnType === 'Sign up (ldap)') {
+    //   this.handleLdapSignupApiRequest();
+    // }
+    // else if (btnType === 'this btn is for test (ldap)') {
+    //   this.handleLdapRemoveAllApiRequest();
+    // }
     else if (_.includes(['insecure OS Command', 'secure OS Command'], inputType)) {
       this.handleOsCommandRequest({inputType, type});
+    }
+    else if (_.includes(['insecure cross site scripting', 'secure cross site scripting'], inputType)) {
+      this.handleCrossSiteScriptingRequest({inputType, type});
+    }
+  }
+
+  handleCrossSiteScriptingRequest({inputType, type}) {
+    var imageUrl = inputType === 'insecure cross site scripting' ? this['insecureCrossSiteScriptingImageurl'].value : this['secureCrossSiteScriptingImageurl'].value;
+
+    if (_.trim(imageUrl)) {
+      this.props.handleFetch({result: {type, imageUrl, from: 'cross'}});
+      this[inputType === 'insecure cross site scripting' ? 'insecureCrossSiteScriptingImageurl' : 'secureCrossSiteScriptingImageurl'].value = '';
+    }
+    else {
+      alert('fileName is blank...')
     }
   }
 
@@ -41,8 +56,11 @@ class Form extends Component {
       sqlApi.post(`/${type}/os/injection`, {fileName})
       .then(response => {
         if (response.status === 200) {
-          this.props.handleFetch({result: {type, res: response.data}});
+          var {fileName} = response.data;
 
+          fileName = fileName.split(';')[0];
+
+          this.props.handleFetch({result: {type, res: {...response.data, fileName}, from: 'os'}});
           this[inputType === 'insecure OS Command' ? 'insecureOsCommandFilename' : 'secureOsCommandFilename'].value = '';
         }
       })
@@ -143,6 +161,31 @@ class Form extends Component {
     }
   }
 
+  // handleLdapSignupApiRequest() {
+  //   var userName, password;
+
+  //   userName = this.username.value;
+  //   password = this.password.value;
+
+  //   if (_.trim(userName) && _.trim(password)) {
+  //     ldapApi.post('signup', {userName, password})
+  //       .then(response => {
+  //         if (response.status === 200) {
+  //           this.props.handleFetch({result: {type: 'signup', res: response.data}});
+
+  //           this.username.value = '';
+  //           this.password.value = '';
+  //         }
+
+  //         if (!response) this.props.handleFetch({result: {type: 'error', res: 'error'}})
+  //       })
+  //       .catch(error => this.props.handleFetch({result: {type: 'error', res: 'error'}}));
+  //   }
+  //   else {
+  //     alert('username or password is blank...')
+  //   }
+  // }
+
   handleNoSqlSignupApiRequest() {
     var userName, password;
 
@@ -179,7 +222,8 @@ class Form extends Component {
   render() {
     var {forms} = this.props;
     var {isFormVisible} = this.state;
-console.log(this)
+
+    console.log(this)
     return (
       <div className={['form-Container', forms.vulneribility].join(' ')}>
         <div className='form-title' onClick={() => this.setState({isFormVisible: !isFormVisible})}>{forms.title}</div>
@@ -208,13 +252,31 @@ console.log(this)
                 </button>
               ))}
               {(forms.textboxes && forms.textboxes.length > 0) && 
-                <textarea 
+                <div 
                   className={[`form-textarea`, isFormVisible ? 'active' : ''].join(' ')} 
                   rows="4" 
                   cols="50"
                   ref={(inputRef) => this[_.camelCase(`${component.title}Textarea`)] = inputRef}
                 >
-                </textarea>
+                  {_.map(component.listOfItems, (item, index) => {
+                    if (item.from === 'os') {
+                      if (item.status === 'success') {
+                        return <div key={index} className='list-item'>{item.fileName} created in {item.time/1000} sec</div>
+                      }
+                      else {
+                        return <div key={index} className='list-item injection'>injection</div>
+                      }
+                    }
+                    else if (item.from === 'cross') {
+                      // TODO handle the injection
+                      return (
+                        <div key={index} className='list-item'>
+                          <img src={item.imageUrl} alt="an image"></img>
+                        </div>
+                      )
+                    }
+                  })}
+                </div>
               }
             </div>
           ))}

@@ -34,7 +34,7 @@ class NoSqlInjection extends Component {
         </div>
         <div className='nosql-injection-demonstration'>
           <Hacker isActive={this.state.hackerStatus} text='{"$gte": 0}' source={hackerIcon} type='nosql'/>
-          <Form 
+          {/* <Form 
             forms={{
               title: 'Sign up', 
               components: [
@@ -42,7 +42,7 @@ class NoSqlInjection extends Component {
               ]
             }}
             handleFetch={({result}) => this.handleFetchedResult({result})}
-          />
+          /> */}
           <Form 
             forms={{
               title: 'Log in', 

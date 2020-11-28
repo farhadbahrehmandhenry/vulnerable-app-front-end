@@ -3,10 +3,11 @@
   margin-bottom: 0.3rem;
 }
 
-.form-Container.os {
+.form-Container.os, .form-Container.cross {
   width: 50%;
   height: 100%;
 }
+
 
 .form-title {
   display: flex;
@@ -22,7 +23,7 @@
   transition: height 1s;
 }
 
-.form-components-container.os {
+.form-components-container.os, .form-components-container.cross {
   flex-direction: row;
 }
 
@@ -38,12 +39,12 @@
   align-items: center;
 }
 
-.form-component.os {
+.form-component.os, .form-component.cross {
   min-width: 50%;
   min-height: 100%;
 }
 
-.form-component.os:first-child {
+.form-component.os:first-child, .form-component.cross:first-child {
   margin-right: 0.3rem;
   min-width: calc(50% - 0.3rem);
 }
@@ -133,6 +134,7 @@
 
 .form-input {
   margin-top: 0.2rem;
+  min-width: 12rem;
 }
 
 .component-title {
@@ -166,6 +168,7 @@
   z-index: 100;
   opacity: 1;
   background-color: gray;
+  width: 100%;
 }
 
 
@@ -178,6 +181,20 @@
   transition: opacity 2s;
   animation-name: appear;
   animation-duration: 2s;
+}
+
+.list-item {
+  margin-top: 0.5rem;
+  color: white;
+}
+
+.list-item img{
+  width: 4rem;
+  height: 4rem;
+}
+
+.list-item.injection {
+  color: red;
 }
 
 @keyframes appear {
