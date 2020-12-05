@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {noSqlApi, sqlApi, ldapApi} from '../../../axios';
+import {noSqlApi, sqlApi, ldapApi, deserializationApi} from '../../../axios';
 import _ from 'lodash';
 
 import './Form.css';
@@ -16,6 +16,9 @@ class Form extends Component {
     }
     else if (_.includes(['insecure Ldap', 'secure Ldap'], inputType)) {
       this.handleLdapApiRequest({inputType, type});
+    }
+    else if (_.includes(['insecure deserialization', 'secure deserialization'], inputType)) {
+      this.handleDeserializationApiRequest({inputType, type});
     }
     // else if (btnType === 'Sign up (noSql)') {
     //   this.handleNoSqlSignupApiRequest();
@@ -46,6 +49,41 @@ class Form extends Component {
     }
     else {
       alert('fileName is blank...')
+    }
+  }
+
+  async handleDeserializationApiRequest({inputType, type}) {
+    var userName, password;
+
+    if (inputType === 'insecure deserialization') {
+      userName = this['insecureDeserializationUsername'].value;
+      password = this['insecureDeserializationPassword'].value;
+    }
+
+    if (inputType === 'secure deserialization') {
+      userName = this['secureDeserializationUsername'].value;
+      password = this['secureDeserializationPassword'].value;
+    }
+
+    var isNoSqlValid = _.includes(['insecure deserialization', 'secure deserialization'], inputType) && _.trim(userName) && _.trim(password);
+
+    if (isNoSqlValid) {
+      deserializationApi.post(`/${type}/deserialization`, {userName, password})
+        .then(response => {
+          console.log(response)
+          if (response.status === 200) {
+            this.props.handleFetch({result: {type, res: response.data}});
+
+            this[inputType === 'insecure deserialization' ? 'insecureDeserializationUsername' : 'secureDeserializationUsername'].value = '';
+            this[inputType === 'insecure deserialization' ? 'insecureDeserializationPassword' : 'secureDeserializationPassword'].value = '';
+          }
+
+          if (!response) this.props.handleFetch({result: {type: 'error', res: 'error'}})
+        })
+        .catch(error => this.props.handleFetch({result: {type: 'error', res: 'error'}}));
+    }
+    else {
+      alert('username or password is blank...')
     }
   }
 
@@ -223,7 +261,6 @@ class Form extends Component {
     var {forms} = this.props;
     var {isFormVisible} = this.state;
 
-    console.log(this)
     return (
       <div className={['form-Container', forms.vulneribility].join(' ')}>
         <div className='form-title' onClick={() => this.setState({isFormVisible: !isFormVisible})}>{forms.title}</div>
@@ -268,12 +305,24 @@ class Form extends Component {
                       }
                     }
                     else if (item.from === 'cross') {
-                      // TODO handle the injection
-                      return (
-                        <div key={index} className='list-item'>
-                          <img src={item.imageUrl} alt="an image"></img>
-                        </div>
-                      )
+                      console.log(item.type)
+                      if (item.type === 'bad') {
+                        return (
+                          <div 
+                            key={index} 
+                            className='list-item' 
+                            dangerouslySetInnerHTML={{__html: `<img src=${item.imageUrl} alt="an image"></img>`}}                        
+                            >
+                          </div>
+                        )
+                      }
+                      else {
+                        return (
+                          <div key={index} className='list-item' >
+                            <img src={item.imageUrl} alt="an image"></img>
+                          </div>
+                        )
+                      }
                     }
                   })}
                 </div>

@@ -1,6 +1,7 @@
 .result-conteiner {
   display: flex;
   align-items: center;
+  min-width: 40rem;
 }
 
 .result-conteiner {
@@ -24,4 +25,12 @@
 
 .result-clear-btn {
   margin-top: 2rem;
+}
+
+.result-waiting-deserialized {
+  font-size: 0.8rem;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  margin-top: 2rem;
+
 }

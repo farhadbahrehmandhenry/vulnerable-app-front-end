@@ -3,7 +3,7 @@ import _ from 'lodash';
 import Hacker from '../../hacker/Hacker.js';
 import hackerIcon from '../../../assets/hacker.png';
 import Form from '../form/Form';
-import Result from '../result/Result';
+
 import './Cross-site-scripting.css';
 
 class CrossSiteScripting extends Component {
@@ -22,11 +22,11 @@ class CrossSiteScripting extends Component {
     var {badUploadedImages, goodUploadedImages} = {...this.state};
 
     if (result.type === 'bad') {
-      badUploadedImages.push({imageUrl: result.imageUrl, from: result.from});
+      badUploadedImages.push({imageUrl: result.imageUrl, from: result.from, type: 'bad'});
       this.setState({badUploadedImages});
     }
     else {
-      goodUploadedImages.push({imageUrl: result.imageUrl, from: result.from});
+      goodUploadedImages.push({imageUrl: result.imageUrl, from: result.from, type: 'good'});
       this.setState({goodUploadedImages});
     }
   }
@@ -42,7 +42,7 @@ class CrossSiteScripting extends Component {
           </div>
         </div>
         <div className='cross-site-scripting-demonstration'>
-          <Hacker isActive={this.state.hackerStatus} text='something.com/something.jpg" onError="alert("hacked!")"' source={hackerIcon} type='ldap'/>
+          <Hacker isActive={this.state.hackerStatus} text='x.jpg" onClick="alert()"' source={hackerIcon} type='ldap'/>
           <Form 
             forms={{
               title: 'upload an image', 
