@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import _ from 'lodash';
 import Hacker from '../../hacker/Hacker.js';
+import Buttons from '../../buttons/Buttons.js';
 import hackerIcon from '../../../assets/hacker.png';
 import Form from '../form/Form';
 
@@ -9,13 +10,17 @@ import './Cross-site-scripting.css';
 class CrossSiteScripting extends Component {
   state = {
     hackerStatus: false,
-    hackerStatus: false,
+    scriptStatus: true,
     badUploadedImages: [],
     goodUploadedImages: []
   }
 
-  handleHackerButtonClick() {
-    this.setState({hackerStatus: !this.state.hackerStatus});
+  handleHackerButtonClick({status}) {
+    this.setState({hackerStatus: status});
+  }
+
+  handleScriptButtonClick({status}) {
+    this.setState({scriptStatus: status});
   }
 
   handleFetchedResult({result}) {
@@ -33,15 +38,15 @@ class CrossSiteScripting extends Component {
 
   render() {
     var classes = ['cross-site-scripting-container', this.props.isActive ? 'active' : ''];
+    var demonstrationClasses = ['sql-injection-demonstration', this.state.scriptStatus ? 'active' : ''];
 
     return (
       <div className={classes.join(' ')}>
-        <div className='cross-site-scripting-hacker-button-container'>
-          <div className='cross-site-scripting-hacker' onClick={() => this.handleHackerButtonClick()}>
-            <img src={hackerIcon}></img>
-          </div>
-        </div>
-        <div className='cross-site-scripting-demonstration'>
+        <Buttons 
+          hackerButtonClick={({status}) => this.handleHackerButtonClick({status})} 
+          scriptButtonClick={({status}) => this.handleScriptButtonClick({status})}
+        />
+        <div className={_.join(demonstrationClasses, ' ')}>
           <Hacker isActive={this.state.hackerStatus} text='x.jpg" onClick="alert()"' source={hackerIcon} type='ldap'/>
           <Form 
             forms={{

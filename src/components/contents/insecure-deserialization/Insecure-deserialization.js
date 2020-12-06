@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import _ from 'lodash';
 import Hacker from '../../hacker/Hacker.js';
 import hackerIcon from '../../../assets/hacker.png';
+import Buttons from '../../buttons/Buttons.js';
 import Form from '../form/Form';
 import Result from '../result/Result';
 
@@ -10,11 +11,16 @@ import './Insecure-deserialization.css';
 class InsecureDeserialization extends Component {
   state = {
     hackerStatus: false,
+    scriptStatus: true,
     result: {}
   }
 
-  handleHackerButtonClick() {
-    this.setState({hackerStatus: !this.state.hackerStatus});
+  handleHackerButtonClick({status}) {
+    this.setState({hackerStatus: status});
+  }
+
+  handleScriptButtonClick({status}) {
+    this.setState({scriptStatus: status});
   }
 
   handleFetchedResult({result}) {
@@ -23,17 +29,17 @@ class InsecureDeserialization extends Component {
 
   render() {
     var classes = ['insecure-deserialization-container', this.props.isActive ? 'active' : ''];
+    var demonstrationClasses = ['sql-injection-demonstration', this.state.scriptStatus ? 'active' : ''];
     var {result} = this.state;
 
     return (
       <div className={_.join(classes, ' ')}>
-        <div className='insecure-deserialization-hacker-button-container'>
-          <div className='nosql-injection-hacker' onClick={() => this.handleHackerButtonClick()}>
-            <img src={hackerIcon}></img>
-          </div>
-        </div>
-        <div className='insecure-deserialization-demonstration'>
-          <Hacker isActive={this.state.hackerStatus} text='_$$ND_FUNC$$_function (){ alert("injection"); }()' source={hackerIcon} type='nosql'/>
+        <Buttons 
+          hackerButtonClick={({status}) => this.handleHackerButtonClick({status})} 
+          scriptButtonClick={({status}) => this.handleScriptButtonClick({status})}
+        />
+        <div className={_.join(demonstrationClasses, ' ')}>
+          <Hacker isActive={this.state.hackerStatus} text='' source={hackerIcon} type='nosql'/>
           <Form 
             forms={{
               title: 'Log in', 

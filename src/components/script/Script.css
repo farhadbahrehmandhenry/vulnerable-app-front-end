@@ -1,0 +1,23 @@
+.script-container {
+  position: relative;
+  top: -100rem;
+  transition: top 4s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: black;
+  height: 0;
+  width: 100%;
+}
+
+.script-container.active {
+  top: 0;
+  transition: top 2s;
+  justify-content: center;
+  z-index: 200;
+  height: 100%;
+  max-width: 90%;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+}

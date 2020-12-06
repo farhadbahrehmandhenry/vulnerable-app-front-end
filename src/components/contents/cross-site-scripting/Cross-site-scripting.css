@@ -12,25 +12,6 @@
   display: flex;
 }
 
-.cross-site-scripting-hacker-button-container {
-  width: 3rem;
-  height: 3rem;
-  border-radius: 1.5rem;
-  background-color: #eb5e28;
-  outline: none;
-  border: none;
-  cursor: pointer;
-  align-self: flex-start;
-  justify-self: flex-start;
-  margin-left: 2rem;
-}
-
-.cross-site-scripting-hacker-button-container img {
-  width: 2rem;
-  height: 2rem;
-  padding-top: 0.2rem;
-}
-
 .cross-site-scripting-demonstration {
   display: flex;
   justify-content: center;
