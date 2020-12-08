@@ -35,7 +35,7 @@ class Buttons extends Component {
             </div>
           </div>
         </div>
-        <Script isActive={this.state.scriptStatus}/>
+        <Script isActive={this.state.scriptStatus} type={this.props.type}/>
       </>
     )
   }

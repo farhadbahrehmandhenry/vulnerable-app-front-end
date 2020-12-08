@@ -46,6 +46,7 @@ class OsInjection extends Component {
         <Buttons 
           hackerButtonClick={({status}) => this.handleHackerButtonClick({status})} 
           scriptButtonClick={({status}) => this.handleScriptButtonClick({status})}
+          type='os'
         />
         <div className={_.join(demonstrationClasses, ' ')}>
           <Form 

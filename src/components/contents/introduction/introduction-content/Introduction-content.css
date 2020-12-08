@@ -1,0 +1,29 @@
+.introduction-content-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.introduction-content-container.active {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+
+
+.introduction-content-injection, .introduction-content-preventing {
+  width: 30%;
+  margin-top: 5rem;
+}
+
+.introduction-content-img {
+  align-self: center;
+}
+
+.introduction-content-img img{
+  width: 30rem;
+  height: 20rem;
+}

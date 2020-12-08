@@ -12,6 +12,20 @@
   flex-direction: column;
 }
 
+.insecure-deserialization-introduction-container {
+  width: 100%;
+  height: 100%;
+  display: none;
+  background-color: #B07D62;
+}
+
+.insecure-deserialization-introduction-container.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 .insecure-deserialization-demonstration {
   display: flex;
   justify-content: center;

@@ -45,6 +45,7 @@ class CrossSiteScripting extends Component {
         <Buttons 
           hackerButtonClick={({status}) => this.handleHackerButtonClick({status})} 
           scriptButtonClick={({status}) => this.handleScriptButtonClick({status})}
+          type='cross'
         />
         <div className={_.join(demonstrationClasses, ' ')}>
           <Hacker isActive={this.state.hackerStatus} text='x.jpg" onClick="alert()"' source={hackerIcon} type='ldap'/>

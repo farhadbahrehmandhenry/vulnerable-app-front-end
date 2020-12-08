@@ -40,6 +40,14 @@
   background-color: #B07D62;
 }
 
+.tab-title.introduction {
+  background-color: #c97c5d;
+}
+
+.tab-title.demo {
+  background-color: #dda15e;
+}
+
 .tab-title.active {
   border: 1px solid black;
   border-bottom: none;

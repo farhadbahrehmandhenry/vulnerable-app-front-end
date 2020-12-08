@@ -37,6 +37,7 @@ class SqlInjection extends Component {
         <Buttons 
           hackerButtonClick={({status}) => this.handleHackerButtonClick({status})} 
           scriptButtonClick={({status}) => this.handleScriptButtonClick({status})}
+          type='sql'
         />
         <div className={_.join(demonstrationClasses, ' ')}>
           <Hacker isActive={this.state.hackerStatus}  text='3 OR 1=1' source={hackerIcon} type='sql'/>

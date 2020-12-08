@@ -37,6 +37,7 @@ class LdapInjection extends Component {
         <Buttons 
           hackerButtonClick={({status}) => this.handleHackerButtonClick({status})} 
           scriptButtonClick={({status}) => this.handleScriptButtonClick({status})}
+          type='ldap'
         />
         <div className={_.join(demonstrationClasses, ' ')}>
           <Hacker isActive={this.state.hackerStatus} text='*' source={hackerIcon} type='ldap'/>

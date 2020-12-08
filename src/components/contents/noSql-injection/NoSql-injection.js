@@ -37,6 +37,7 @@ class NoSqlInjection extends Component {
         <Buttons 
           hackerButtonClick={({status}) => this.handleHackerButtonClick({status})} 
           scriptButtonClick={({status}) => this.handleScriptButtonClick({status})}
+          type='nosql'
         />
         <div className={_.join(demonstrationClasses, ' ')}>
           <Hacker isActive={this.state.hackerStatus} text='{"$gte": 0}' source={hackerIcon} type='nosql'/>

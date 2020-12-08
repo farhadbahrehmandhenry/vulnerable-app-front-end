@@ -305,7 +305,6 @@ class Form extends Component {
                       }
                     }
                     else if (item.from === 'cross') {
-                      console.log(item.type)
                       if (item.type === 'bad') {
                         return (
                           <div 
