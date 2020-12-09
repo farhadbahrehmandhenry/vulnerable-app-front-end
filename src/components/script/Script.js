@@ -7,6 +7,8 @@ import ldapBadWay from '../../assets/ldap-bad.png';
 import ldapGoodWay from '../../assets/ldap-good.png';
 import crossBadWay from '../../assets/cross-bad.png';
 import crossGoodWay from '../../assets/cross-good.png';
+import crossBadWayOne from '../../assets/cross-bad1.png';
+import crossGoodWayOne from '../../assets/cross-good1.png';
 import deserializationBadWay from '../../assets/deserialization-bad.png';
 import deserializationGoodWay from '../../assets/deserialization-good.png';
 import osBadWay from '../../assets/os-bad.png';
@@ -39,6 +41,8 @@ class Script extends Component {
     else if (type === 'cross') {
       badWayIcon = crossBadWay;
       goodWayIcon = crossGoodWay;
+      var badWayIconOne = crossBadWayOne;
+      var goodWayIconOne = crossGoodWayOne;
     }
     else if (type === 'deserialization') {
       badWayIcon = deserializationBadWay;
@@ -48,7 +52,9 @@ class Script extends Component {
     return (
       <div className={classes.join(' ')}>
         <img src={badWayIcon} alt='script'></img>
+        {/* {type === 'cross' && <img src={badWayIconOne} alt='script'></img>} */}
         <img src={goodWayIcon} alt='script'></img>
+        {/* {type === 'cross' && <img src={goodWayIconOne} alt='script'></img>} */}
       </div>
     )
   }

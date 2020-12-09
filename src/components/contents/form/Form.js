@@ -4,8 +4,19 @@ import _ from 'lodash';
 
 import './Form.css';
 
+// res.setHeader("Content-Security-Policy", "script-src http://localhost3000");
+// no inline 
+// http://localhost:3000/?default=<a href="#" onclick="fetch('http://localhost:5000/api/vulnerable/send-money').then(x => x.json()).then(x => console.log('hfhgfhgf', x))"> click to win $$$$$$</a>
+// http://localhost:3000/?default=<img src onerror="fetch('http://localhost:5000/api/vulnerable/send-money').then(x => x.json()).then(x => console.log('hfhgfhgf', x))" />
+
+const defaultText = decodeURI(
+  document.location.href.substring(
+    document.location.href.indexOf("default=") + 8
+  )
+);
+
 class Form extends Component {
-  state = {isFormVisible: false}
+  state = {isFormVisible: false, crossBadText: '', crossGoodText: ''}
 
   handleApiRequest({inputType, type, btnType}) {
     if (_.includes(['insecure noSql', 'secure noSql'], inputType)) {
@@ -264,70 +275,69 @@ class Form extends Component {
     return (
       <div className={['form-Container', forms.vulneribility].join(' ')}>
         <div className='form-title' onClick={() => this.setState({isFormVisible: !isFormVisible})}>{forms.title}</div>
-        <div className={['form-components-container', forms.vulneribility, isFormVisible ? 'active' : ''].join(' ')}>
-          {forms.components.map(component => (
-            <div 
-              key={component.id} 
-              className={['form-component', forms.vulneribility, component.direction, component.type, isFormVisible ? 'active' : ''].join(' ')}
-            >
-              {component.title && <div className={['component-title', isFormVisible ? 'active' : ''].join(' ')}>{component.title}</div>}
-              {component.inputs.map(input => (
-                <input 
-                  className={[`form-input`, isFormVisible ? 'active' : ''].join(' ')} 
-                  type='text' 
-                  key={input}
-                  placeholder={input}
-                  ref={(inputRef) => this[_.camelCase(`${component.title}${_.capitalize(input)}`)] = inputRef}
-                ></input>
-              ))}
-              {component.buttons.map((button, index) => (
-                <button 
-                  className={[`form-btn`, isFormVisible ? 'active' : ''].join(' ')} 
-                  key={button.type}
-                  onClick={() => this.handleApiRequest({inputType: component.title, type: component.type, btnType: button.type})}
-                >{button.type}
-                </button>
-              ))}
-              {(forms.textboxes && forms.textboxes.length > 0) && 
-                <div 
-                  className={[`form-textarea`, isFormVisible ? 'active' : ''].join(' ')} 
-                  rows="4" 
-                  cols="50"
-                  ref={(inputRef) => this[_.camelCase(`${component.title}Textarea`)] = inputRef}
-                >
-                  {_.map(component.listOfItems, (item, index) => {
-                    if (item.from === 'os') {
-                      if (item.status === 'success') {
-                        return <div key={index} className='list-item'>{item.fileName} created in {item.time/1000} sec</div>
+          <div className={['form-components-container', forms.vulneribility, isFormVisible ? 'active' : ''].join(' ')}>
+            {forms.components.map(component => (
+              <div 
+                key={component.id} 
+                className={['form-component', forms.vulneribility, component.direction, component.type, isFormVisible ? 'active' : ''].join(' ')}
+              >
+                {component.title && <div className={['component-title', isFormVisible ? 'active' : ''].join(' ')}>{component.title}</div>}
+                {component.inputs.map(input => (
+                  <input 
+                    className={[`form-input`, isFormVisible ? 'active' : ''].join(' ')} 
+                    type='text' 
+                    key={input}
+                    placeholder={input}
+                    ref={(inputRef) => this[_.camelCase(`${component.title}${_.capitalize(input)}`)] = inputRef}
+                  ></input>
+                ))}
+                {component.buttons.map((button, index) => (
+                  <button 
+                    className={[`form-btn`, isFormVisible ? 'active' : ''].join(' ')} 
+                    key={button.type}
+                    onClick={() => this.handleApiRequest({inputType: component.title, type: component.type, btnType: button.type})}
+                  >{button.type}
+                  </button>
+                ))}
+                {(forms.textboxes && forms.textboxes.length > 0) && 
+                  <div 
+                    className={[`form-textarea`, forms.vulneribility, isFormVisible ? 'active' : ''].join(' ')} 
+                    rows="4" 
+                    cols="50"
+                    ref={(inputRef) => this[_.camelCase(`${component.title}Textarea`)] = inputRef}
+                  >
+                    {_.map(component.listOfItems, (item, index) => {
+                      if (item.from === 'os') {
+                        if (item.status === 'success') {
+                          return <div key={index} className='list-item'>{item.fileName} created in {item.time/1000} sec</div>
+                        }
+                        else {
+                          return <div key={index} className='list-item injection'>injection</div>
+                        }
                       }
-                      else {
-                        return <div key={index} className='list-item injection'>injection</div>
-                      }
+                    })}
+                    {forms.vulneribility === 'cross' &&
+                      component.type === 'bad' ?
+                        <>
+                          <textarea 
+                            value={this.state.crossBadText} 
+                            onChange={e => this.setState({crossBadText: e.target.value})}
+                          ></textarea>  
+                          <div dangerouslySetInnerHTML={{__html: this.state.crossBadText}}></div>
+                        </>
+                      : 
+                        <>
+                          <textarea 
+                            value={this.state.crossGoodText} 
+                            onChange={e => this.setState({crossGoodText: e.target.value})}
+                          ></textarea>  
+                          <div>{this.state.crossGoodText}</div>
+                        </>
                     }
-                    else if (item.from === 'cross') {
-                      if (item.type === 'bad') {
-                        return (
-                          <div 
-                            key={index} 
-                            className='list-item' 
-                            dangerouslySetInnerHTML={{__html: `<img src=${item.imageUrl} alt="an image"></img>`}}                        
-                            >
-                          </div>
-                        )
-                      }
-                      else {
-                        return (
-                          <div key={index} className='list-item' >
-                            <img src={item.imageUrl} alt="an image"></img>
-                          </div>
-                        )
-                      }
-                    }
-                  })}
-                </div>
-              }
-            </div>
-          ))}
+                  </div>
+                }
+          </div>
+            ))}
         </div>
       </div>
     );

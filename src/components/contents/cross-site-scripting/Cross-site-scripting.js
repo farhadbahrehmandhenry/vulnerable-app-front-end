@@ -39,6 +39,7 @@ class CrossSiteScripting extends Component {
   render() {
     var classes = ['cross-site-scripting-container', this.props.isActive ? 'active' : ''];
     var demonstrationClasses = ['sql-injection-demonstration', this.state.scriptStatus ? 'active' : ''];
+    document.cookie = "username=Farhad password=123";
 
     return (
       <div className={classes.join(' ')}>
@@ -48,17 +49,22 @@ class CrossSiteScripting extends Component {
           type='cross'
         />
         <div className={_.join(demonstrationClasses, ' ')}>
-          <Hacker isActive={this.state.hackerStatus} text='x.jpg" onClick="alert()"' source={hackerIcon} type='ldap'/>
+          <Hacker 
+            isActive={this.state.hackerStatus} 
+            text="<a href='#' onclick='alert(document.cookie)'>click me</a>"
+            source={hackerIcon} 
+            type='ldap'
+          />
           <Form 
             forms={{
-              title: 'upload an image', 
+              title: 'type Text', 
               vulneribility: 'cross',
               textboxes:['cross images'],
               components: [
                 {
                   id: 1, 
-                  inputs: ['imageUrl'], 
-                  buttons: [{type: 'Upload'}], 
+                  inputs: [], 
+                  buttons: [], 
                   title: 'insecure cross site scripting', 
                   type: 'bad', 
                   direction: 'column',
@@ -66,8 +72,8 @@ class CrossSiteScripting extends Component {
                 },
                 {
                   id: 2, 
-                  inputs: ['imageUrl'], 
-                  buttons: [{type: 'Upload'}], 
+                  inputs: [], 
+                  buttons: [], 
                   title: 'secure cross site scripting', 
                   type: 'good', 
                   direction: 'column',
