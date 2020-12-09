@@ -15,11 +15,11 @@ class Result extends Component {
             <button className='result-clear-btn' onClick={() => this.props.resetResult()}>Clear</button>
             {result.type === 'error' ? 
               <div className='result-waiting'>error!!</div> :
-              serialized &&
+              (serialized && deserialized.userName !== 'injection') ?
               <>
                 <div className='result-waiting-deserialized'>
                   {`serialized: `}
-                  <strong>{`${serialized}`}</strong>
+                  <strong>{`${serialized.substring(0, 50)}...`}</strong>
                 </div>
                 <div className='result-waiting-deserialized'>
                   {`deserialized: `} 
@@ -29,6 +29,8 @@ class Result extends Component {
                   </strong>
                 </div>
               </>  
+              :
+              <div className='result-waiting'>injection</div>
             }
           </div>
         )
