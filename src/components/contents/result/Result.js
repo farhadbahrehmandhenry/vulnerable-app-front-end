@@ -8,12 +8,12 @@ class Result extends Component {
     var resultXml;
     if (result.type) {
       if (result.from === 'deserialization') {
-        var {serialized, deserialized, type} = result.res;
+        var {serialized, deserialized} = result.res;
 
         resultXml = (
           <div className='result-conteiner'>
             <button className='result-clear-btn' onClick={() => this.props.resetResult()}>Clear</button>
-            {type === 'error' ? 
+            {result.type === 'error' ? 
               <div className='result-waiting'>error!!</div> :
               serialized &&
               <>
@@ -34,7 +34,6 @@ class Result extends Component {
         )
       }
       else {
-        console.log(result)
         var userName = result.from === 'ldap' ? result.res.cn : result.res.userName;
 
         resultXml = (

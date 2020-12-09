@@ -20,7 +20,7 @@ import crossInjectionIcon from '../../../../assets/cross-icon.png'
 import crossInjectionContent from '../../../../assets/cross-content.png'
 import crossInjectionPreventing from '../../../../assets/cross-preventing.png'
 
-import deserializationInjectionIcon from '../../../../assets/deserialization-icon.jpg'
+import deserializationInjectionIcon from '../../../../assets/deserialization-icon.png'
 import deserializationInjectionContent from '../../../../assets/deserialization-content.png'
 import deserializationInjectionPreventing from '../../../../assets/deserialization-preventing.png'
 

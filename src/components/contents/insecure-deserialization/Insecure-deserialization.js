@@ -40,14 +40,19 @@ class InsecureDeserialization extends Component {
           type='deserialization'
         />
         <div className={_.join(demonstrationClasses, ' ')}>
-          <Hacker isActive={this.state.hackerStatus} text='' source={hackerIcon} type='nosql'/>
+          <Hacker 
+            isActive={this.state.hackerStatus} 
+            text='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6Il8kJE5EX0ZVTkMkJF9mdW5jdGlvbiAoKXsgcmV0dXJuICdoYWNrZWQhISEhJzsgfSgpIiwicGFzc3dvcmQiOiJMb25kb24iLCJpYXQiOjE2MDc1NDI3OTR9.SMz7J4ru803fU-Xd5jTuCFRkjrbPCQdwMDrrZEuSSXc' 
+            source={hackerIcon} 
+            type='nosql'
+          />
           <Form 
             forms={{
-              title: 'Log in', 
+              title: 'authentication by a token', 
               vulneribility: 'deserialization',
               components: [
-                {id: 1, inputs: ['username', 'password'], buttons: [{type: 'Sign up'}], title: 'insecure deserialization', type: 'bad', direction: 'column'},
-                {id: 2, inputs: ['username', 'password'], buttons: [{type: 'Sign up'}], title: 'secure deserialization', type: 'good', direction: 'column'}
+                {id: 1, inputs: ['token'], buttons: [{type: 'Send'}], title: 'insecure deserialization', type: 'bad', direction: 'column'},
+                {id: 2, inputs: ['token'], buttons: [{type: 'Send'}], title: 'secure deserialization', type: 'good', direction: 'column'}
               ]
             }}
             handleFetch={({result}) => this.handleFetchedResult({result})}

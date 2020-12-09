@@ -9,6 +9,9 @@ import './Form.css';
 // http://localhost:3000/?default=<a href="#" onclick="fetch('http://localhost:5000/api/vulnerable/send-money').then(x => x.json()).then(x => console.log('hfhgfhgf', x))"> click to win $$$$$$</a>
 // http://localhost:3000/?default=<img src onerror="fetch('http://localhost:5000/api/vulnerable/send-money').then(x => x.json()).then(x => console.log('hfhgfhgf', x))" />
 
+// insecure deserialization
+// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IkphY2siLCJwYXNzd29yZCI6IkxvbmRvbiIsImlhdCI6MTYwNzUzOTgzM30.1KWediN-jfcXw_6sfFgfT3pyG17-rE_N0sz55O_aDpo
+
 const defaultText = decodeURI(
   document.location.href.substring(
     document.location.href.indexOf("default=") + 8
@@ -64,37 +67,46 @@ class Form extends Component {
   }
 
   async handleDeserializationApiRequest({inputType, type}) {
-    var userName, password;
+    var token;
 
     if (inputType === 'insecure deserialization') {
-      userName = this['insecureDeserializationUsername'].value;
-      password = this['insecureDeserializationPassword'].value;
+      token = this['insecureDeserializationToken'].value;
     }
 
     if (inputType === 'secure deserialization') {
-      userName = this['secureDeserializationUsername'].value;
-      password = this['secureDeserializationPassword'].value;
+      token = this['secureDeserializationToken'].value;
     }
 
-    var isNoSqlValid = _.includes(['insecure deserialization', 'secure deserialization'], inputType) && _.trim(userName) && _.trim(password);
+    var isNoSqlValid = _.includes(['insecure deserialization', 'secure deserialization'], inputType) && _.trim(token);
 
     if (isNoSqlValid) {
-      deserializationApi.post(`/${type}/deserialization`, {userName, password})
-        .then(response => {
-          console.log(response)
-          if (response.status === 200) {
-            this.props.handleFetch({result: {type, res: response.data}});
+      sqlApi.post(`/${type}/deserialization`, {token})
+      .then(response => {
+        if (response.status === 200) {
+          this.props.handleFetch({result: {type, res: response.data}});
 
-            this[inputType === 'insecure deserialization' ? 'insecureDeserializationUsername' : 'secureDeserializationUsername'].value = '';
-            this[inputType === 'insecure deserialization' ? 'insecureDeserializationPassword' : 'secureDeserializationPassword'].value = '';
-          }
+          this[inputType === 'insecure deserialization' ? 'insecureDeserializationToken' : 'secureDeserializationToken'].value = '';
+        }
 
-          if (!response) this.props.handleFetch({result: {type: 'error', res: 'error'}})
-        })
-        .catch(error => this.props.handleFetch({result: {type: 'error', res: 'error'}}));
+        if (!response) this.props.handleFetch({result: {type: 'error', res: 'error'}})
+      })
+      .catch(error => this.props.handleFetch({result: {type: 'error', res: 'error'}}));
+
+      // flask- python
+      // deserializationApi.post(`/${type}/deserialization`, {token})
+      //   .then(response => {
+      //     if (response.status === 200) {
+      //       this.props.handleFetch({result: {type, res: response.data}});
+
+      //       this[inputType === 'insecure deserialization' ? 'insecureDeserializationToken' : 'secureDeserializationToken'].value = '';
+      //     }
+
+      //     if (!response) this.props.handleFetch({result: {type: 'error', res: 'error'}})
+      //   })
+      //   .catch(error => this.props.handleFetch({result: {type: 'error', res: 'error'}}));
     }
     else {
-      alert('username or password is blank...')
+      alert('token is blank...')
     }
   }
 
