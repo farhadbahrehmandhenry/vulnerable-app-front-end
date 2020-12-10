@@ -19,7 +19,7 @@ const defaultText = decodeURI(
 );
 
 class Form extends Component {
-  state = {isFormVisible: false, crossBadText: '', crossGoodText: ''}
+  state = {isFormVisible: false, crossBadText: defaultText, crossGoodText: ''}
 
   handleApiRequest({inputType, type, btnType}) {
     if (_.includes(['insecure noSql', 'secure noSql'], inputType)) {
